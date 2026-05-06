@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns: xmlns="http://www.w3.org/1999/html" th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret Skadesrapport</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">BILABONNEMENT</div>
+    <div>
+        <a th:href="@{/skfit-brugerrolle}"><button>Skift brugerrolle</button></a>
+        <a th:href="@{/logout}"><button>Log ud</button></a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="header">
+        <h1>Skade og udbedring</h1>
+        <a th:href="@{/skaderapporter}"><button>Skaderapporter</button></a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Opret skaderapport</h2>
+            <p>Vognnummer: </strong><span th:text="${vognnummer}">X</span></p>
+        </div>
+
+        <div th:each="damage : ${damages}" class="damage-item">
+            <div>
+                <p><strong>Skade</strong></p>
+                <p>Beskrivelse: <span th:text="${damage.decription}"></span></p>
+                <p>Pris: <span th:text="${damge.price}"></span> kr. </p>
+            </div>
+            <form th:action="@{/fjern-skade}" method="post">
+                <input type="hidden" name="damageId" th:value="${damage.id}">
+                <button type="submit">Fjern skade</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <form th:action="@{/opret-skade}" method="post">
+            <div class="add-damage">
+                <label>strong>Skade:</strong</label>
+                <input type="text" name="description" placeholder="Beskrivelse">
+                <input type="number" name="price" placeholder="Pris" step="0.01" min="0">
+                <span>kr.</span>
+                <button type="submit">Opret skade</button>
+            </div>
+        </form>
+
+        <div class="afslut-container">
+            <form th:action="@{/afslut-skaderapport}" method="post">
+                <button type="submit">Afslut skaderapport</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

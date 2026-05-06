@@ -17,6 +17,11 @@ public class Damages {
         this.price = price;
     }
 
+    public Damages(String description, double price) {
+        this.description = description;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

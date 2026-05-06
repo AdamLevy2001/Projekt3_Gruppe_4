@@ -6,14 +6,14 @@ public class DamageReports {
 
     private int id;
 
-    private int LeasesID;
+    private int leasesID;
 
-    private LocalDate date;
+    private LocalDate created_at;
 
-    public DamageReports(int id, int leasesID, LocalDate date) {
+    public DamageReports(int id, int leasesID, LocalDate created_at) {
         this.id = id;
-        LeasesID = leasesID;
-        this.date = date;
+        this.leasesID = leasesID;
+        this.created_at = created_at;
     }
 
     public int getId() {
@@ -25,18 +25,18 @@ public class DamageReports {
     }
 
     public int getLeasesID() {
-        return LeasesID;
+        return leasesID;
     }
 
     public void setLeasesID(int leasesID) {
-        LeasesID = leasesID;
+        this.leasesID = leasesID;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getCreated_at() {
+        return created_at;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setCreated_at(LocalDate created_at) {
+        this.created_at = created_at;
     }
 }
