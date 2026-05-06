@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Opret Lejeaftale</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/CreateLeaseStyles.css}">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Opret ny lejeaftale</h1>
+
+  <form th:action="@{/leases/create}" method="post">
+
+    <div class="section">
+      <h3>Kundeinformation</h3>
+
+      <div class="row">
+        <div>
+          <label>Fornavn</label>
+          <input type="text" name="firstName" placeholder="Fornavn" required>
+        </div>
+
+        <div>
+          <label>Efternavn</label>
+          <input type="text" name="lastName" placeholder="Efternavn" required>
+        </div>
+
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div>
+          <label>Tel.nr.</label>
+          <input type="text" name="phoneNumber" placeholder="Telefonnummer" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+
+      <label>Vælg bil</label>
+      <select name="carVehicleNo" required>
+        <option value="">-- Vælg bil --</option>
+        <option th:each="car : ${cars}"
+                th:value="${car.vehicleNo}"
+                th:text="${car.brand + ' ' + car.model}">
+        </option>
+      </select>
+
+      <label>Udleveringslokation</label>
+      <select name="deliveryLocationId" required>
+        <option value="">-- Vælg lokation --</option>
+        <option th:each="loc : ${locations}"
+                th:value="${loc.id}"
+                th:text="${loc.city}">
+        </option>
+      </select>
+
+      <label>Abonnementslængde</label>
+      <select name="subscriptionLength">
+        <option>3 mdr.</option>
+        <option>6 mdr.</option>
+        <option>12 mdr.</option>
+      </select>
+
+      <label>Kilometer pr. måned</label>
+      <select name="kmPerMonth">
+        <option value="1000">1.000 km</option>
+        <option value="1500">1.500 km</option>
+        <option value="2000">2.000 km</option>
+      </select>
+
+      <label>Start dato</label>
+      <input type="date" name="startDate" required>
+
+    </div>
+
+    <div class="section">
+      <div class="inline-group">
+
+        <label>Førstegangsydelse</label>
+        <input type="number" step="0.01" name="downPayment" placeholder="xx.xxx">
+
+        <span>kr.</span>
+
+        <label>Månedlig ydelse</label>
+        <input type="number" step="0.01" name="monthlyPayment" placeholder="x.xxx">
+
+        <span>kr.</span>
+
+        <button type="submit">Opret lejeaftale</button>
+
+      </div>
+    </div>
+
+  </form>
+</div>
+
+</body>
+</html>
