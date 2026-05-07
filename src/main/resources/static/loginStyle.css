@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-container {
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-wrapper {
+    width: min(500px, 60%);
+    margin: auto;
+}
+
+.login-form {
+    background: white;
+    padding: 45px 60px 60px;
+    border-radius: 12px;
+    box-shadow: 0 11px 34px rgba(0, 0, 0, .25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    position: relative;
+    flex: 1;
+}
+
+.form-group input {
+    width: 100%;
+    height: 56px;
+    padding: 20px 16px 6px;
+
+    border: 1px solid rgb(110, 110, 115);
+    border-radius: 8px;
+
+    font-size: 17px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 16px;
+    top: 18px;
+
+    font-size: 17px;
+    pointer-events: none;
+    transition: .15s ease;
+
+    color: #888;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: 8px;
+    font-size: 12px;
+}
+
+.btn {
+    width: 100%;
+    flex: 1;
+    height: 40px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#btn-submit {
+    background: #1553C0;
+    border: none;
+    color: white;
+}
+
+#btn-submit:hover {
+    background: #0f3d8f;
+}

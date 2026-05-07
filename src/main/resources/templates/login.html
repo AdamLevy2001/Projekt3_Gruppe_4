@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Log ind</title>
+    <link rel="stylesheet" th:href="@{/loginStyle.css}">
+</head>
+<body>
+<header>
+
+</header>
+<main>
+    <div class="login-container">
+        <form class="form-wrapper" th:action="@{/login}" method="post">
+            <div class="login-form">
+                <h2 class="form-title">Log ind</h2>
+
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+
+                <div class="username-wrapper">
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" th:value="${username}" placeholder=" " required>
+                        <label for="username">Brugernavn</label>
+                    </div>
+                </div>
+
+                <div class="password-wrapper">
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder=" " required>
+                        <label for="password">Adgangskode</label>
+                    </div>
+                </div>
+
+                <div class="button-wrapper">
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="btn-submit">Log ind</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
