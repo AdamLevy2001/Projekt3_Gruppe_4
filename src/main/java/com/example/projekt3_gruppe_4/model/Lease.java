@@ -32,6 +32,8 @@ public Lease(int id, int carVehicle_no, int customer_id, int deliveryLocation_id
     this.status=status;
 }
 
+public Lease(){}
+
     public int getId() {
         return id;
     }
