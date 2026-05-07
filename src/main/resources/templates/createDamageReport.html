@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<html xmlns: xmlns="http://www.w3.org/1999/html" th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Opret Skadesrapport</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/createDamageReport.css}">
 </head>
 <body>
-
-<nav>
-    <div class="logo">BILABONNEMENT</div>
-    <div>
-        <a th:href="@{/skfit-brugerrolle}"><button>Skift brugerrolle</button></a>
-        <a th:href="@{/logout}"><button>Log ud</button></a>
-    </div>
-</nav>
 
 <div class="container">
     <div class="header">
@@ -24,14 +16,14 @@
     <div class="card">
         <div class="card-header">
             <h2>Opret skaderapport</h2>
-            <p>Vognnummer: </strong><span th:text="${vognnummer}">X</span></p>
+            <p><strong>Vognnummer: </strong><span th:text="${vognnummer}">X</span></p>
         </div>
 
         <div th:each="damage : ${damages}" class="damage-item">
             <div>
                 <p><strong>Skade</strong></p>
-                <p>Beskrivelse: <span th:text="${damage.decription}"></span></p>
-                <p>Pris: <span th:text="${damge.price}"></span> kr. </p>
+                <p>Beskrivelse: <span th:text="${damage.description}"></span></p>
+                <p>Pris: <span th:text="${damage.price}"></span> kr. </p>
             </div>
             <form th:action="@{/fjern-skade}" method="post">
                 <input type="hidden" name="damageId" th:value="${damage.id}">
@@ -43,7 +35,7 @@
 
         <form th:action="@{/opret-skade}" method="post">
             <div class="add-damage">
-                <label>strong>Skade:</strong</label>
+                <label><strong>Skade:</strong></label>
                 <input type="text" name="description" placeholder="Beskrivelse">
                 <input type="number" name="price" placeholder="Pris" step="0.01" min="0">
                 <span>kr.</span>

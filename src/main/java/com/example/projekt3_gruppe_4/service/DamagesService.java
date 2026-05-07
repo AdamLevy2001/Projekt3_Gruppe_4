@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DamagesService {
 
@@ -27,5 +29,13 @@ public class DamagesService {
         }
         Damages damages = new Damages(description, price);
         damagesRepository.saveDamage(damages);
+    }
+
+    public List<Damages> getDamages() {
+        return damagesRepository.getAllDamages();
+    }
+
+    public void fjernDamage(int damageId) {
+        damagesRepository.deleteDamage(damageId);
     }
 }
