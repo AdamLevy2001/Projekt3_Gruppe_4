@@ -7,13 +7,13 @@ public class DataregisteringUser extends User{
 
     @Override
     public String getDefaultPage(){
-        return "seLedigeBiler";
+        return "tilbageleverede-biler";
     }
 
     @Override
     public boolean hasAccess(String page){
         return switch (page){
-            case "seLedigeBiler", "opretLejeaftale", "seUdlejedeBiler" -> true;
+            case "tilbageleverede-biler", "opretLejeaftale", "seUdlejedeBiler" -> true;
             default -> false;
         };
     }

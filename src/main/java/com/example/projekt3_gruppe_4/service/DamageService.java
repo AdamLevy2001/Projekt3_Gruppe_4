@@ -1,20 +1,19 @@
 package com.example.projekt3_gruppe_4.service;
 
-import com.example.projekt3_gruppe_4.model.Damages;
-import com.example.projekt3_gruppe_4.repository.DamagesRepository;
-import jakarta.servlet.http.HttpSession;
+import com.example.projekt3_gruppe_4.model.Damage;
+import com.example.projekt3_gruppe_4.repository.DamageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DamagesService {
+public class DamageService {
 
     @Autowired
-    DamagesRepository damagesRepository;
+    DamageRepository damagesRepository;
 
-    public void registrerDamages(String description, double price, HttpSession session) {
+    public void registrerDamages(String description, double price) {
 
         if (description == null || description.isEmpty()) {
             throw new IllegalArgumentException("Beskrivelse kan ikke være tomt");
@@ -27,11 +26,11 @@ public class DamagesService {
         if (price <= 0) {
             throw new IllegalArgumentException("Pris skal være et positivt tal");
         }
-        Damages damages = new Damages(description, price);
+        Damage damages = new Damage(description, price);
         damagesRepository.saveDamage(damages);
     }
 
-    public List<Damages> getDamages() {
+    public List<Damage> getDamages() {
         return damagesRepository.getAllDamages();
     }
 

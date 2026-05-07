@@ -1,5 +1,6 @@
 package com.example.projekt3_gruppe_4.repository;
 
+import com.example.projekt3_gruppe_4.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
@@ -19,7 +20,7 @@ public class CarRepository {
 
     public List<Car> findReturned() {
         List<Car> cars = new ArrayList<>();
-        String sql = "SELECT vehicle_no, chassis_no, brand, model, status FROM cars WHERE status = 'returned'";
+        String sql = "SELECT * FROM cars WHERE status = 'returned'";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -27,11 +28,11 @@ public class CarRepository {
 
             while (rs.next()) {
                 Car car = new Car();
-                car.setVehicleNo(rs.getInt("vehicle_no"));
-                car.setChassisNo(rs.getString("chassis_no"));
+                car.setVehicle_no(rs.getInt("vehicle_no"));
+                car.setChassis_no(rs.getString("chassis_no"));
                 car.setBrand(rs.getString("brand"));
                 car.setModel(rs.getString("model"));
-                car.setPurchasePrice(rs.getDouble("purchase_price"));
+                car.setPurchase_price(rs.getDouble("purchase_price"));
                 car.setStatus(rs.getString("status"));
                 cars.add(car);
             }
@@ -39,5 +40,9 @@ public class CarRepository {
             throw new RuntimeException("Fejl ved indlæsning af tilbageleverede biler", e);
         }
         return cars;
+    }
+
+    public List<Car> getAllCars(){
+        return new ArrayList<>();
     }
 }

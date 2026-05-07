@@ -1,38 +1,36 @@
 package com.example.projekt3_gruppe_4.model;
 
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 
 public class Lease {
+    private int id;
+    private int carVehicle_no;
+    private int customer_id;
+    private int deliveryLocation_id;
+    private double down_payment;
+    private double monthly_payment;
+    private int km_per_month;
+    private LocalDate start_date;
+    private LocalDate end_date;
+    private String status;
 
-private int id;
-private int carVehicle_no;
-private int customer_id;
-private int deliveryLocation_id;
-private double down_payment;
-private double monthly_payment;
-private int km_per_month;
-private LocalDate start_date;
-private LocalDate end_date;
-private String status;
+    public Lease(int id, int carVehicle_no, int customer_id, int deliveryLocation_id,
+                 double down_payment, double monthly_payment, int km_per_month,
+                 LocalDate start_date, LocalDate end_date, String status) {
+        this.id = id;
+        this.carVehicle_no = carVehicle_no;
+        this.customer_id = customer_id;
+        this.deliveryLocation_id = deliveryLocation_id;
+        this.down_payment = down_payment;
+        this.monthly_payment = monthly_payment;
+        this.km_per_month = km_per_month;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.status = status;
+    }
 
-public Lease(int id, int carVehicle_no, int customer_id, int deliveryLocation_id,
-             double down_payment, double monthly_payment, int km_per_month,
-             LocalDate start_date, LocalDate end_date, String status) {
-    this.id=id;
-    this.carVehicle_no=carVehicle_no;
-    this.customer_id=customer_id;
-    this.deliveryLocation_id=deliveryLocation_id;
-    this.down_payment=down_payment;
-    this.monthly_payment=monthly_payment;
-    this.km_per_month=km_per_month;
-    this.start_date=start_date;
-    this.end_date=end_date;
-    this.status=status;
-}
-
-public Lease(){}
+    public Lease() {
+    }
 
     public int getId() {
         return id;

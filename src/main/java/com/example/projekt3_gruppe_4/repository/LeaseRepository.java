@@ -2,6 +2,7 @@ package com.example.projekt3_gruppe_4.repository;
 
 import com.example.projekt3_gruppe_4.model.Lease;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -9,13 +10,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@Repository
 public class LeaseRepository {
-
     @Autowired
     DataSource dataSource;
 
     public void createLease(Lease lease) {
-        String insertLeaseSql = "INSERT INTO leases (carVehichle_no, customer_id, deliveryLocation_id, down_payment, monthly_payment, km_per_month, start_date, end_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertLeaseSql = "INSERT INTO leases (carVehicle_no, customer_id, deliveryLocation_id, down_payment, monthly_payment, km_per_month, start_date, end_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String updateCarSql = "UPDATE cars SET status ='leased' WHERE vehicle_no = ?";
 
         try (Connection connection = dataSource.getConnection()) {

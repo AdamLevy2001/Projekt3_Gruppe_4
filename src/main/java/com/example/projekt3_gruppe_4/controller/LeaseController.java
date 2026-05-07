@@ -1,9 +1,10 @@
 package com.example.projekt3_gruppe_4.controller;
 
+import com.example.projekt3_gruppe_4.model.Car;
 import com.example.projekt3_gruppe_4.model.Customer;
 import com.example.projekt3_gruppe_4.model.DeliveryLocation;
 import com.example.projekt3_gruppe_4.model.Lease;
-import com.example.projekt3_gruppe_4.repository.DeliveryLocationRepository;
+import com.example.projekt3_gruppe_4.service.CarService;
 import com.example.projekt3_gruppe_4.service.DeliveryLocationService;
 import com.example.projekt3_gruppe_4.service.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +17,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.util.List;
 
-import static jdk.internal.org.jline.reader.impl.LineReaderImpl.CompletionType.List;
-
 @Controller
 public class LeaseController {
-
     @Autowired
     LeaseService leaseService;
-    CarRepository carRepository;
-    DeliveryLocationRepository deliveryLocationRepository;
+
     @Autowired
-    private DeliveryLocationService deliveryLocationService;
+    CarService carService;
+
+    @Autowired
+    DeliveryLocationService deliveryLocationService;
 
     @GetMapping("/lease/create")
     public String showCreateLeaseForm(Model model) {
 
-        List<Cars> carlist = carRepository.getAllCars();
+        List<Car> carlist = carService.getAllCars();
         List<DeliveryLocation> locations = deliveryLocationService.getAllDeliveryLocations();
 
         model.addAttribute("cars", carlist);
@@ -41,7 +41,7 @@ public class LeaseController {
     }
 
 
-    @PostMapping("/lease/create)")
+    @PostMapping("/lease/create")
     public String createLease(
             @RequestParam String firstName,
             @RequestParam String lastName,
@@ -66,7 +66,6 @@ public class LeaseController {
         customer.setEmail(email);
         customer.setPhone(phoneNumber);
 
-
         Lease lease = new Lease();
 
         lease.setCarVehicle_no(carVehicleNo);
@@ -80,8 +79,7 @@ public class LeaseController {
 
         lease.setKm_per_month(kmPerMonth);
 
-
         leaseService.createLeaseWithCustomer(customer, lease);
-        return "redirect:/leases/create";
+        return "redirect:/lease/create";
     }
 }

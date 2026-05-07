@@ -12,6 +12,8 @@ public class LeaseService {
 
     @Autowired
     CustomerRepository customerRepository;
+
+    @Autowired
     LeaseRepository leaseRepository;
 
     public void createLeaseWithCustomer(Customer customer, Lease lease) {

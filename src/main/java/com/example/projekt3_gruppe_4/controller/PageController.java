@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
     @GetMapping
-    public String mainPage(HttpSession session){
+    public String mainPage(HttpSession session) {
         User user = (User) session.getAttribute("loggedInUser");
         if (user != null) {
             return "redirect:" + user.getDefaultPage();

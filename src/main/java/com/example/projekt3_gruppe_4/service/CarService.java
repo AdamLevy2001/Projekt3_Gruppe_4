@@ -16,4 +16,8 @@ public class CarService {
     public List<Car> getReturnedCars() {
         return carRepository.findReturned();
     }
+
+    public List<Car> getAllCars(){
+        return carRepository.getAllCars();
+    }
 }

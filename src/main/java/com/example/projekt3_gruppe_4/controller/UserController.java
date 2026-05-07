@@ -27,7 +27,7 @@ public class UserController {
                             HttpSession session) {
         try {
             User user = userService.login(username, password);
-            session.setAttribute("loggedInUser",user);
+            session.setAttribute("loggedInUser", user);
             return "redirect:" + user.getDefaultPage();
         } catch (IllegalArgumentException e) {
             model.addAttribute("username", username);

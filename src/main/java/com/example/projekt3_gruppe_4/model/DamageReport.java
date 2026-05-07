@@ -2,17 +2,17 @@ package com.example.projekt3_gruppe_4.model;
 
 import java.time.LocalDate;
 
-public class DamageReports {
+public class DamageReport {
 
     private int id;
 
-    private int leasesID;
+    private int lease_id;
 
     private LocalDate created_at;
 
-    public DamageReports(int id, int leasesID, LocalDate created_at) {
+    public DamageReport(int id, int lease_id, LocalDate created_at) {
         this.id = id;
-        this.leasesID = leasesID;
+        this.lease_id = lease_id;
         this.created_at = created_at;
     }
 
@@ -24,12 +24,12 @@ public class DamageReports {
         this.id = id;
     }
 
-    public int getLeasesID() {
-        return leasesID;
+    public int getLease_id() {
+        return lease_id;
     }
 
-    public void setLeasesID(int leasesID) {
-        this.leasesID = leasesID;
+    public void setLease_id(int lease_id) {
+        this.lease_id = lease_id;
     }
 
     public LocalDate getCreated_at() {
