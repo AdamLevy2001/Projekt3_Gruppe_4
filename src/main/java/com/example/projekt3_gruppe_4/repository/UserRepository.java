@@ -32,7 +32,7 @@ public class UserRepository {
                         resultSet.getString("role"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Database fejl", e);
+            throw new RuntimeException("Fejl ved hentning af bruger med brugernavn: " + username, e);
         }
 
         return null;
