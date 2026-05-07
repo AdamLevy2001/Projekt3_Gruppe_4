@@ -28,17 +28,20 @@ public class LeaseController {
     @Autowired
     private DeliveryLocationService deliveryLocationService;
 
-    @GetMapping("/create")
+    @GetMapping("/lease/create")
     public String showCreateLeaseForm(Model model) {
 
         List<Cars> carlist = carRepository.getAllCars();
         List<DeliveryLocation> locations = deliveryLocationService.getAllDeliveryLocations();
 
+        model.addAttribute("cars", carlist);
+        model.addAttribute("locations", locations);
+
         return "create-lease";
     }
 
 
-    @PostMapping("/create)")
+    @PostMapping("/lease/create)")
     public String createLease(
             @RequestParam String firstName,
             @RequestParam String lastName,
