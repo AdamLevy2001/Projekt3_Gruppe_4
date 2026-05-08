@@ -19,7 +19,7 @@ public class DamageRepository {
     DataSource dataSource;
 
     public void saveDamage(Damage damage) {
-        String sql = "INSERT INTO damages (damageReportID, description, price) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO damages (damageReport_id, description, price) VALUES (?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -34,17 +34,19 @@ public class DamageRepository {
         }
     }
 
-    public List<Damage> getAllDamages() {
-        String sql = "SELECT * FROM damages";
+    public List<Damage> getAllDamagesByReportId(int damageReportId) {
+        String sql = "SELECT * FROM damages WHERE damageReport_id = ?";
         List<Damage> damages = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            statement.setInt(1, damageReportId);
+
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 damages.add(new Damage(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("id"), damageReportId,
                         resultSet.getString("description"),
                         resultSet.getDouble("price")
                 ));

@@ -6,8 +6,6 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:replace="~{fragments/navbar :: navbar}"></div>
-
 <main class="container">
     <h1>Tilbageleverede biler</h1>
     <p>Vælg en bil for at oprette en skadesrapport</p>
@@ -28,12 +26,12 @@
         </thead>
         <tbody>
         <tr th:each="car : ${cars}">
-            <td th:text="${car.vehicleNo}"></td>
-            <td th:text="${car.chassisNo}"></td>
+            <td th:text="${car.vehicle_no}"></td>
+            <td th:text="${car.chassis_no}"></td>
             <td th:text="${car.brand}"></td>
             <td th:text="${car.model}"></td>
             <td>
-                <a th:href="@{/skade/opret-skadesrapport(carId=${car.vehicleNo})}">Opret skadesrapport</a>
+                <a th:href="@{/skade/opret-skadesrapport(carId=${car.vehicle_no})}">Opret skadesrapport</a>
             </td>
         </tr>
         </tbody>
