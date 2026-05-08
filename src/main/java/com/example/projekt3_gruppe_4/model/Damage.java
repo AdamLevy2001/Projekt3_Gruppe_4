@@ -22,8 +22,8 @@ public class Damage {
         this.price = price;
     }
 
-    public Damage(int id, String description, double price) {
-        this.id=id;
+    public Damage(int damageReportID, String description, double price) {
+        this.damageReportID=damageReportID;
         this.description=description;
         this.price=price;
     }
