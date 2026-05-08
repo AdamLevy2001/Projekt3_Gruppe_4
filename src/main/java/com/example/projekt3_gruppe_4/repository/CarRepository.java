@@ -42,7 +42,29 @@ public class CarRepository {
         return cars;
     }
 
-    public List<Car> getAllCars(){
-        return new ArrayList<>();
+    public List<Car> getAllCars() {
+        String sql = "SELECT * FROM cars WHERE status = 'available'";
+        List<Car> carList = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Car car = new Car(
+                        resultSet.getInt("vehicle_no"),
+                        resultSet.getString("chassis_no"),
+                        resultSet.getString("brand"),
+                        resultSet.getString("model"),
+                        resultSet.getDouble("purchase_price"),
+                        resultSet.getString("status"));
+
+                carList.add(car);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Kunne ikke hente bil liste!");
+        }
+        return carList;
     }
 }
