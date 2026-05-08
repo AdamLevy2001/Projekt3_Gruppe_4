@@ -1,163 +1,176 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Opret Lejeaftale</title>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" th:href="@{/CreateLeaseStyles.css}">
+    <title>Opret Lejeaftale</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/common.css}">
+    <link rel="stylesheet" th:href="@{/createLeaseStyles.css}">
 </head>
 
 <body>
-
-<div class="container">
-
-  <h1>Dataregistrering</h1>
-
-  <form th:action="@{/lease/create}" method="post">
-
-
-    <div class="section">
-      <h2>Opret ny lejeaftale</h2>
-
-      <h3>Kundeinformation</h3>
-
-      <div class="row">
-
-        <div class="input-group">
-          <label>Fornavn</label>
-          <input type="text"
-                 name="firstName"
-                 placeholder="Fornavn"
-                 required>
-        </div>
-
-        <div class="input-group">
-          <label>Efternavn</label>
-          <input type="text"
-                 name="lastName"
-                 placeholder="Efternavn"
-                 required>
-        </div>
-
-        <div class="input-group">
-          <label>Email</label>
-          <input type="email"
-                 name="email"
-                 placeholder="Email"
-                 required>
-        </div>
-
-        <div class="input-group">
-          <label>Tel.nr.</label>
-          <input type="text"
-                 name="phoneNumber"
-                 placeholder="Telefonnummer"
-                 required>
-        </div>
-
-      </div>
+<main>
+    <div class="page-header">
+        <h1>Dataregistrering</h1>
     </div>
+    <div class="container">
+        <div class="container-header">
+            <h2>Opret ny lejeaftale</h2>
+        </div>
+        <form th:action="@{/lease/create}" method="post">
 
-    <div class="section">
 
-      <div class="form-row">
-        <label>Vælg bil:</label>
+            <div class="section">
 
-        <select name="carVehicleNo" required>
-          <option value="">-- Vælg bil --</option>
+                <h3>Kundeinformation</h3>
 
-          <option th:each="car : ${cars}"
-                  th:value="${car.vehicle_no}"
-                  th:text="${car.brand + ' ' + car.model}"
-                  th:selected="${selectedCar != null and selectedCar.vehicle_no eq car.vehicle_no}">
-          </option>
-        </select>
-      </div>
+                <div class="row">
 
-      <div class="form-row">
-        <label>Udleveringslokation:</label>
+                    <div class="input-group">
+                        <label>Fornavn</label>
+                        <input type="text"
+                               name="firstName"
+                               placeholder="Fornavn"
+                               required>
+                    </div>
 
-        <select name="deliveryLocationId" required>
-          <option value="">-- Vælg lokation --</option>
+                    <div class="input-group">
+                        <label>Efternavn</label>
+                        <input type="text"
+                               name="lastName"
+                               placeholder="Efternavn"
+                               required>
+                    </div>
 
-          <option th:each="loc : ${locations}"
-                  th:value="${loc.id}"
-                  th:text="${loc.address}">
-          </option>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email"
+                               name="email"
+                               placeholder="Email"
+                               required>
+                    </div>
 
-        </select>
-      </div>
+                    <div class="input-group">
+                        <label>Tel.nr.</label>
+                        <input type="text"
+                               name="phoneNumber"
+                               placeholder="Telefonnummer"
+                               required>
+                    </div>
 
-      <div class="form-row">
-        <label>Kilometer pr. måned:</label>
+                </div>
+                <hr>
+            </div>
 
-        <select name="kmPerMonth" required>
-          <option value="1000">1.000 km</option>
-          <option value="1500">1.500 km</option>
-          <option value="2000">2.000 km</option>
-        </select>
-      </div>
+            <div class="section">
 
-      <div class="form-row">
-        <label>Start dato:</label>
+                <div class="form-row">
+                    <label>Vælg bil:</label>
 
-        <input type="date"
-               name="startDate"
-               required>
-      </div>
+                    <select name="carVehicleNo" required>
+                        <option value="">-- Vælg bil --</option>
 
-      <div class="form-row">
-        <label>Slut dato:</label>
+                        <option th:each="car : ${cars}"
+                                th:value="${car.vehicle_no}"
+                                th:text="${car.brand + ' ' + car.model}">
+                        </option>
 
-        <input type="date"
-               name="endDate"
-               required>
-      </div>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label>Udleveringslokation:</label>
+
+                    <select name="deliveryLocationId" required>
+                        <option value="">-- Vælg lokation --</option>
+
+                        <option th:each="loc : ${locations}"
+                                th:value="${loc.id}"
+                                th:text="${loc.name}">
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label>Abonnementslængde:</label>
+
+                    <select name="leaseLength" required>
+                        <option value="3">3 mdr.</option>
+                        <option value="6">6 mdr.</option>
+                        <option value="12">12 mdr.</option>
+                        <option value="24">24 mdr.</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label>Kilometer pr. måned:</label>
+
+                    <select name="kmPerMonth" required>
+                        <option value="1500">1.500 km</option>
+                        <option value="1750">1.750 km</option>
+                        <option value="2000">2.000 km</option>
+                        <option value="2500">2.500 km</option>
+                        <option value="3000">3.000 km</option>
+                        <option value="3500">3.500 km</option>
+                        <option value="4000">4.000 km</option>
+                        <option value="4500">4.500 km</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label>Start dato:</label>
+
+                    <input type="date"
+                           name="startDate"
+                           required>
+                </div>
+
+
+            </div>
+
+            <div class="section payment-section">
+
+                <div class="payment-group">
+
+                    <div class="payment-input">
+                        <label>Førstegangsydelse:</label>
+
+                        <div class="price-box">
+                            <input type="number"
+                                   name="downPayment"
+                                   placeholder="Indtast beløb"
+                                   required>
+
+                            <span>kr.</span>
+                        </div>
+                    </div>
+
+                    <div class="payment-input">
+                        <label>Månedlig ydelse:</label>
+
+                        <div class="price-box">
+                            <input type="number"
+                                   name="monthlyPayment"
+                                   placeholder="Indtast beløb"
+                                   required>
+
+                            <span>kr.</span>
+                        </div>
+                    </div>
+
+                    <button type="submit">
+                        Opret lejeaftale
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
 
     </div>
+</main>
 
-    <div class="section payment-section">
-
-      <div class="payment-group">
-
-        <div class="payment-input">
-          <label>Førstegangsydelse:</label>
-
-          <div class="price-box">
-            <input type="number"
-                   step="0.01"
-                   name="downPayment"
-                   placeholder="xx.xxx"
-                   required>
-
-            <span>kr.</span>
-          </div>
-        </div>
-
-        <div class="payment-input">
-          <label>Månedlig ydelse:</label>
-
-          <div class="price-box">
-            <input type="number"
-                   step="0.01"
-                   name="monthlyPayment"
-                   placeholder="x.xxx"
-                   required>
-
-            <span>kr.</span>
-          </div>
-        </div>
-
-        <button type="submit">
-          Opret lejeaftale
-        </button>
-
-      </div>
-
-    </div>
-
-  </form>
-
-</div>
 
 </body>
 </html>

@@ -3,11 +3,8 @@ package com.example.projekt3_gruppe_4.model;
 import java.time.LocalDate;
 
 public class DamageReport {
-
     private int id;
-
     private int lease_id;
-
     private LocalDate created_at;
 
     public DamageReport(int id, int lease_id, LocalDate created_at) {

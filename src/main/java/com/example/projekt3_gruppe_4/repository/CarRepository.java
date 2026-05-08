@@ -92,4 +92,28 @@ public class CarRepository {
         }
         return null;
     }
+
+    public List<Car> findLeased() {
+        List<Car> cars = new ArrayList<>();
+        String sql = "SELECT vehicle_no, chassis_no, brand, model, purchase_price, status FROM cars WHERE status = 'leased'";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet rs = statement.executeQuery()) {
+
+            while (rs.next()) {
+                Car car = new Car();
+                car.setVehicle_no(rs.getInt("vehicle_no"));
+                car.setChassis_no(rs.getString("chassis_no"));
+                car.setBrand(rs.getString("brand"));
+                car.setModel(rs.getString("model"));
+                car.setPurchase_price(rs.getDouble("purchase_price"));
+                car.setStatus(rs.getString("status"));
+                cars.add(car);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Fejl ved indlæsning af udlejede biler", e);
+        }
+        return cars;
+    }
 }

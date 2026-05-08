@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Repository
 public class LeaseRepository {
@@ -52,5 +49,24 @@ public class LeaseRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Database fejl");
         }
+    }
+
+    public int findLeaseIdByVehicleNo(int vehicle_no) {
+        String sql = "SELECT id FROM leases WHERE carVehicle_no = ? AND status = 'active'";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, vehicle_no);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Database fejl ved hentning af lejeaftale", e);
+        }
+
+        throw new RuntimeException("Ingen aktiv lejeaftale fundet for bil: " + vehicle_no);
     }
 }

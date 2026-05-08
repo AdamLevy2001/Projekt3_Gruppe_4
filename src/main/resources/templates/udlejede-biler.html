@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Udlejde biler</title>
+    <link rel="stylesheet" th:href="@{/leasedVehicles.css}">
+</head>
+<body>
+
+
+<main class="container">
+    <h1>Udlejede biler</h1>
+    <p>Oversigt over alle biler, som er udlejet.</p>
+
+    <div th:if="${cars.isEmpty()}" class="info-message">
+        Der er ingen udlejede biler.
+    </div>
+
+    <table th:unless="${cars.isEmpty()}" class="data-table">
+        <thead>
+        <tr>
+            <th>Vognnr.</th>
+            <th>Stelnr.</th>
+            <th>Mærke</th>
+            <th>Model</th>
+            <th>Pris</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.vehicle_no}"></td>
+            <td th:text="${car.chassis_no}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.purchase_price} + ' kr.'"></td>
+            <td th:text="${car.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

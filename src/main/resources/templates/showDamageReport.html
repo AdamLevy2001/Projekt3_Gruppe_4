@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oversigt</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
+    <link rel="stylesheet" th:href="@{/showDamageReport.css}">
+</head>
+<body>
+<main>
+    <div class="page-header">
+        <h1>Oversigt</h1>
+    </div>
+    <div class="container">
+        <div class="container-header">
+            <h2>Skadesrapporter</h2>
+        </div>
+        <div class="section">
+            <div th:each="damageReport : ${damageReports}" class="report-item">
+                <div>
+                    <p id="label">Skadesrapport</p>
+                    <p>Mærke: <span th:text="${damageReport.brand}"></span></p>
+                    <p>Model: <span th:text="${damageReport.model}"></span></p>
+                    <p>Kundens navn: <span th:text="${damageReport.firstName + ' ' + damageReport.lastName}"></span></p>
+                </div>
+                <a th:href="@{/createDamage(carId=${damageReport.vehicle_no})}">
+                    <button>Åben skadesrapport</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
