@@ -1,6 +1,7 @@
 package com.example.projekt3_gruppe_4.repository;
 
 import com.example.projekt3_gruppe_4.model.DamageReport;
+import com.example.projekt3_gruppe_4.model.DamageReportView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,31 +36,50 @@ public class DamageReportRepository {
         }
     }
 
-    public List<DamageReport> getAllDamageReports() {
-        String sql = "SELECT dr.id, dr.lease_id, dr.created_at, " +
-                "c.brand, c.model, " +
-                "CONCAT(cu.first_name, ' ', cu.last_name) AS customerName " +
+    public List<DamageReportView> getAllDamageReports() {
+        String damageReportSql = "SELECT dr.id, dr.lease_id, dr.created_at, " +
+                "c.brand, c.model, c.vehicle_no " +
                 "FROM damageReports dr " +
                 "INNER JOIN leases l ON dr.lease_id = l.id " +
-                "INNER JOIN cars c ON l.carVehicle_no = c.vehicle_no " +
-                "INNER JOIN customers cu ON l.customer_id = cu.id";
-       List<DamageReport> damageReports = new ArrayList<>();
+                "INNER JOIN cars c ON l.carVehicle_no = c.vehicle_no";
+
+        String customerSql = "SELECT cu.first_name, cu.last_name " +
+                "FROM customers cu " +
+                "INNER JOIN leases l ON cu.id = l.customer_id " +
+                "WHERE l.id = ?";
+
+        List<DamageReportView> damageReports = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(damageReportSql)) {
 
             ResultSet resultSet = statement.executeQuery();
+
             while (resultSet.next()) {
-                DamageReport damageReport = new DamageReport(
+                int leaseId = resultSet.getInt("lease_id");
+
+                String firstName = "";
+                String lastName = "";
+
+                try (PreparedStatement customerStatement = connection.prepareStatement(customerSql)) {
+                    customerStatement.setInt(1, leaseId);
+                    ResultSet customerResult = customerStatement.executeQuery();
+                    if (customerResult.next()) {
+                        firstName = customerResult.getString("first_name");
+                        lastName = customerResult.getString("last_name");
+                    }
+                }
+
+                DamageReportView view = new DamageReportView(
                         resultSet.getInt("id"),
-                        resultSet.getInt("lease_id"),
+                        resultSet.getInt("vehicle_no"),
                         resultSet.getDate("created_at").toLocalDate(),
                         resultSet.getString("brand"),
                         resultSet.getString("model"),
-                        resultSet.getString("customerName")
-
+                        firstName,
+                        lastName
                 );
-                damageReports.add(damageReport);
+                damageReports.add(view);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Fejl ved visning af skaderapport", e);
