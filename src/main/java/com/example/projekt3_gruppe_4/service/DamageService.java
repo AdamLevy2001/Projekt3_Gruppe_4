@@ -13,7 +13,7 @@ public class DamageService {
     @Autowired
     DamageRepository damagesRepository;
 
-    public void registrerDamages(String description, double price) {
+    public void registrerDamages(String description, double price, int damageReport_id) {
 
         if (description == null || description.isEmpty()) {
             throw new IllegalArgumentException("Beskrivelse kan ikke være tomt");
@@ -26,12 +26,12 @@ public class DamageService {
         if (price <= 0) {
             throw new IllegalArgumentException("Pris skal være et positivt tal");
         }
-        Damage damages = new Damage(description, price);
+        Damage damages = new Damage(damageReport_id, description, price);
         damagesRepository.saveDamage(damages);
     }
 
-    public List<Damage> getDamages() {
-        return damagesRepository.getAllDamages();
+    public List<Damage> getAllDamagesByReportId(int damageReport_id) {
+        return damagesRepository.getAllDamagesByReportId(damageReport_id);
     }
 
     public void fjernDamage(int damageId) {
