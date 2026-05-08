@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav th:fragment="navbar">
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img th:src="@{/images/BILABONNEMENT_logo.svg}" alt="Bilabonnement logo">
+        </div>
+        <div class="navbar-buttons">
+            <a th:if="${session.loggedInUser != null and session.loggedInUser.hasAccess('lease/create')}"
+               th:href="@{/lease/create}">
+                <button>Opret lejeaftale</button>
+            </a>
+            <a th:if="${session.loggedInUser != null and session.loggedInUser.hasAccess('tilbageleverede-biler')}"
+               th:href="@{/tilbageleverede-biler}">
+                <button>Tilbageleverede biler</button>
+            </a>
+            <a th:if="${session.loggedInUser != null and session.loggedInUser.hasAccess('showDamageReport')}"
+               th:href="@{/showDamageReport}">
+                <button>Skadesrapporter</button>
+            </a>
+            <a th:if="${session.loggedInUser != null and session.loggedInUser.hasAccess('dashboard')}"
+               th:href="@{/dashboard}">
+                <button>Dashboard</button>
+            </a>
+
+            <form th:if="${session.loggedInUser != null}" th:action="@{/logout}" method="post">
+                <button type="submit">Log ud</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
