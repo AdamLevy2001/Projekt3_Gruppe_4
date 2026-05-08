@@ -3,7 +3,8 @@
 <head>
     <title>Opret Lejeaftale</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/CreateLeaseStyles.css}">
+    <link rel="stylesheet" th:href="@{/common.css}">
+    <link rel="stylesheet" th:href="@{/createLeaseStyles.css}">
 </head>
 
 <body>
@@ -138,7 +139,7 @@
                         <label>Førstegangsydelse:</label>
 
                         <div class="price-box">
-                            <input type="text"
+                            <input type="number"
                                    name="downPayment"
                                    placeholder="Indtast beløb"
                                    required>
@@ -151,7 +152,7 @@
                         <label>Månedlig ydelse:</label>
 
                         <div class="price-box">
-                            <input type="text"
+                            <input type="number"
                                    name="monthlyPayment"
                                    placeholder="Indtast beløb"
                                    required>
