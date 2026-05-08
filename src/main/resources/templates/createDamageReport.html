@@ -3,53 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Opret Skadesrapport</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
     <link rel="stylesheet" th:href="@{/createDamageReport.css}">
 </head>
 <body>
-
-<div class="container">
-    <div class="header">
+<main>
+    <div class="page-header">
         <h1>Skade og udbedring</h1>
-        <a th:href="@{/skaderapporter}"><button>Skaderapporter</button></a>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h2>Opret skaderapport</h2>
-            <p><strong>Vognnummer: </strong><span th:text="${vognnummer}">X</span></p>
+    <div class="container">
+        <div class="container-header">
+            <h2>Opret skadesrapport</h2>
+            <h2><strong>Vognnummer: </strong><span th:text="${vognnummer}"></span></h2>
         </div>
-
-        <div th:each="damage : ${damages}" class="damage-item">
-            <div>
-                <p><strong>Skade</strong></p>
-                <p>Beskrivelse: <span th:text="${damage.description}"></span></p>
-                <p>Pris: <span th:text="${damage.price}"></span> kr. </p>
+        <div class="section">
+            <div th:each="damage : ${damages}" class="damage-item">
+                <div>
+                    <p><strong>Skade</strong></p>
+                    <p>Beskrivelse: <span th:text="${damage.description}"></span></p>
+                    <p>Pris: <span th:text="${damage.price}"></span> kr.</p>
+                </div>
+                <form th:action="@{/removeDamage}" method="post">
+                    <input type="hidden" name="damageId" th:value="${damage.id}">
+                    <input type="hidden" name="carId" th:value="${vognnummer}">
+                    <button type="submit">
+                        Fjern skade
+                    </button>
+                </form>
             </div>
-            <form th:action="@{/fjern-skade}" method="post">
-                <input type="hidden" name="damageId" th:value="${damage.id}">
-                <button type="submit">Fjern skade</button>
-            </form>
+            <hr th:if="${!damages.isEmpty()}">
         </div>
-
-        <hr>
-
-        <form th:action="@{/opret-skade}" method="post">
-            <div class="add-damage">
-                <label><strong>Skade:</strong></label>
-                <input type="text" name="description" placeholder="Beskrivelse">
-                <input type="number" name="price" placeholder="Pris" step="0.01" min="0">
-                <span>kr.</span>
-                <button type="submit">Opret skade</button>
+        <form th:action="@{/createDamage}" method="post">
+            <input type="hidden" name="carId" th:value="${vognnummer}">
+            <input type="hidden" name="damageReportId" th:value="${damageReportId}">
+            <div class="section">
+                <div class="form-row">
+                    <label>Skade:</label>
+                    <div class="input-group">
+                        <input type="text" name="description" placeholder="Beskrivelse" required>
+                    </div>
+                    <div class="price-box">
+                        <input type="text" name="price" placeholder="Pris" required>
+                        <span><strong>kr.</strong></span>
+                    </div>
+                    <button type="submit">
+                        Opret skade
+                    </button>
+                </div>
             </div>
         </form>
-
         <div class="afslut-container">
-            <form th:action="@{/afslut-skaderapport}" method="post">
-                <button type="submit">Afslut skaderapport</button>
-            </form>
+            <button type="submit">Afslut skadesrapport</button>
         </div>
     </div>
-</div>
-
+</main>
 </body>
 </html>
