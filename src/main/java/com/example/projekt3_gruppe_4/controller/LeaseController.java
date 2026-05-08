@@ -52,7 +52,7 @@ public class LeaseController {
             @RequestParam int deliveryLocationId,
 
             @RequestParam LocalDate startDate,
-            @RequestParam LocalDate endDate,
+            @RequestParam int leaseLength,
 
             @RequestParam double downPayment,
             @RequestParam double monthlyPayment,
@@ -60,23 +60,18 @@ public class LeaseController {
     ) {
 
         Customer customer = new Customer();
-
         customer.setFirst_name(firstName);
         customer.setLast_name(lastName);
         customer.setEmail(email);
         customer.setPhone(phoneNumber);
 
         Lease lease = new Lease();
-
         lease.setCarVehicle_no(carVehicleNo);
         lease.setDeliveryLocation_id(deliveryLocationId);
-
         lease.setStart_date(startDate);
-        lease.setEnd_date(endDate);
-
+        lease.setEnd_date(startDate.plusMonths(leaseLength));
         lease.setDown_payment(downPayment);
         lease.setMonthly_payment(monthlyPayment);
-
         lease.setKm_per_month(kmPerMonth);
 
         leaseService.createLeaseWithCustomer(customer, lease);
