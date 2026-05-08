@@ -29,13 +29,21 @@ public class LeaseController {
     DeliveryLocationService deliveryLocationService;
 
     @GetMapping("/lease/create")
-    public String showCreateLeaseForm(Model model) {
+    public String showCreateLeaseForm(@RequestParam(required = false) Integer carId,
+                                      Model model) {
 
         List<Car> carlist = carService.getAllCars();
         List<DeliveryLocation> locations = deliveryLocationService.getAllDeliveryLocations();
 
         model.addAttribute("cars", carlist);
         model.addAttribute("locations", locations);
+
+
+        if (carId!=null) {
+            Car selectedCar = carService.findCarById(carId);
+
+            model.addAttribute("selectedCar", selectedCar);
+        }
 
         return "create-lease";
     }

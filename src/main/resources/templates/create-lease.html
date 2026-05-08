@@ -12,7 +12,7 @@
 
   <h1>Dataregistrering</h1>
 
-  <form th:action="@{/leases/create}" method="post">
+  <form th:action="@{/lease/create}" method="post">
 
 
     <div class="section">
@@ -66,10 +66,10 @@
           <option value="">-- Vælg bil --</option>
 
           <option th:each="car : ${cars}"
-                  th:value="${car.vehicleNo}"
-                  th:text="${car.brand + ' ' + car.model}">
+                  th:value="${car.vehicle_no}"
+                  th:text="${car.brand + ' ' + car.model}"
+                  th:selected="${selectedCar != null and selectedCar.vehicle_no eq car.vehicle_no}">
           </option>
-
         </select>
       </div>
 
@@ -81,7 +81,7 @@
 
           <option th:each="loc : ${locations}"
                   th:value="${loc.id}"
-                  th:text="${loc.city}">
+                  th:text="${loc.address}">
           </option>
 
         </select>
