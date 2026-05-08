@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/ListeGrid.css}">
 </head>
 <body>
+<div th:replace="~{fragment/navbar :: navbar}"></div>
 
 <main class="container">
     <h1>Tilbageleverede biler</h1>
@@ -26,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="car : ${cars}" class="car-card">
+        <tr th:each="car : ${cars}">
             <td th:text="${car.vehicle_no}"></td>
             <td th:text="${car.chassis_no}"></td>
             <td th:text="${car.brand}"></td>
