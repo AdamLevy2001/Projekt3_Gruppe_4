@@ -42,6 +42,31 @@ public class CarRepository {
         return cars;
     }
 
+    public Car findCarById(int carId) {
+        String sql = "SELECT * FROM cars WHERE vehicle_no = ?";
+
+        try (Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, carId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Car car = new Car(
+                        rs.getInt("vehicle_no"),
+                        rs.getString("chassis_no"),
+                        rs.getString("brand"),
+                        rs.getString("model"),
+                        rs.getDouble("purchase_price"),
+                        rs.getString("status")
+                );
+                return car;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Bil blev ikke fundet i systemet!");
+        }
+        return null;
+    }
+
     public List<Car> getAllCars() {
         String sql = "SELECT * FROM cars WHERE status = 'available'";
         List<Car> carList = new ArrayList<>();
@@ -68,28 +93,27 @@ public class CarRepository {
         return carList;
     }
 
-    public Car findCarById(int carId) {
-        String sql = "SELECT * FROM cars WHERE vehicle_no = ?";
+    public List<Car> findLeased() {
+        List<Car> cars = new ArrayList<>();
+        String sql = "SELECT vehicle_no, chassis_no, brand, model, purchase_price, status FROM cars WHERE status = 'leased'";
 
         try (Connection connection = dataSource.getConnection();
-        PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, carId);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                Car car = new Car(
-                        rs.getInt("vehicle_no"),
-                        rs.getString("chassis_no"),
-                        rs.getString("brand"),
-                        rs.getString("model"),
-                        rs.getDouble("purchase_price"),
-                        rs.getString("status")
-                );
-                return car;
-            }
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet rs = statement.executeQuery()) {
 
+            while (rs.next()) {
+                Car car = new Car();
+                car.setVehicle_no(rs.getInt("vehicle_no"));
+                car.setChassis_no(rs.getString("chassis_no"));
+                car.setBrand(rs.getString("brand"));
+                car.setModel(rs.getString("model"));
+                car.setPurchase_price(rs.getDouble("purchase_price"));
+                car.setStatus(rs.getString("status"));
+                cars.add(car);
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("Bil blev ikke fundet i systemet!");
+            throw new RuntimeException("Fejl ved indlæsning af udlejede biler", e);
         }
-        return null;
+        return cars;
     }
 }
