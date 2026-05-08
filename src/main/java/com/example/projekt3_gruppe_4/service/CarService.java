@@ -20,4 +20,8 @@ public class CarService {
     public List<Car> getAllCars(){
         return carRepository.getAllCars();
     }
+
+    public List<Car> getLeasedCars() {
+        return carRepository.findLeased();
+    }
 }

@@ -2,27 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tilbageleverede biler</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Udlejde biler</title>
+    <link rel="stylesheet" th:href="@{/leasedVehicles.css}">
 </head>
 <body>
 
 <main class="container">
-    <h1>Tilbageleverede biler</h1>
-    <p>Vælg en bil for at oprette en skadesrapport</p>
+    <h1>Udlejede biler</h1>
+    <p>Oversigt over biler, der er udlejet.</p>
 
     <div th:if="${cars.isEmpty()}" class="info-message">
-        Der er ingen tilbageleverede biler.
+        Der er ingen udlejede biler.
     </div>
 
-    <table th:if="${!cars.isEmpty()}" class="data-table">
+    <table th:unless="${cars.isEmpty()}" class="data-table">
         <thead>
         <tr>
             <th>Vognnr.</th>
             <th>Stelnr.</th>
             <th>Mærke</th>
             <th>Model</th>
-            <th>Handling</th>
+            <th>Pris</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -31,9 +32,8 @@
             <td th:text="${car.chassis_no}"></td>
             <td th:text="${car.brand}"></td>
             <td th:text="${car.model}"></td>
-            <td>
-                <a th:href="@{/skade/opret-skadesrapport(carId=${car.vehicle_no})}">Opret skadesrapport</a>
-            </td>
+            <td th:text="${car.purchase_price} + ' kr.'"></td>
+            <td th:text="${car.status}"></td>
         </tr>
         </tbody>
     </table>
