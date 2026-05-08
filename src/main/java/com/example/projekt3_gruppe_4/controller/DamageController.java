@@ -38,9 +38,6 @@ public class DamageController {
                                @RequestParam double price,
                                @RequestParam int damageReportId,
                                @RequestParam int carId) {
-        System.out.println("damageReportId: " + damageReportId);
-        System.out.println("description: " + description);
-        System.out.println("price: " + price);
         damageService.registrerDamages(description, price, damageReportId);
         return "redirect:/createDamage?carId=" + carId;
     }
@@ -48,7 +45,6 @@ public class DamageController {
     @PostMapping("/removeDamage")
     public String removeDamage(@RequestParam int damageId,
                                @RequestParam int carId) {
-        System.out.println("Sletter skade med id: " + damageId);
         damageService.fjernDamage(damageId);
         return "redirect:/createDamage?carId=" + carId;
     }
