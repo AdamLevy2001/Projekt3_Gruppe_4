@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oversigt</title>
+    <link rel="stylesheet" th:href="@{/showDamageReport.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Oversigt</h1>
+
+    <div class="card">
+        <h2>Skadesrapport</h2>
+
+        <div th:each="damageReport : ${damageReports}" class="report-item">
+            <div>
+                <p><strong>Skadesrapport</strong></p>
+                <p>Mærke: <span th:text="${damageReport.brand}">XXX</span></p>
+                <p>Model: <span th:text="${damageReport.model}">XXXX</span></p>
+                <p>Kundens navn: <span th:text="${damageReport.customerName}">XXX XXX</span></p>
+            </div>
+            <a th:href="@{/damageReport/{id}(id=${damageReport.id})}">
+                <button>Åben skadesrapport</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
