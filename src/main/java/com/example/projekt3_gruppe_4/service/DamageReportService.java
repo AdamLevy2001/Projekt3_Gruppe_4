@@ -16,4 +16,8 @@ public class DamageReportService {
     public List<DamageReportView> getAllDamageReports() {
         return damageReportRepository.getAllDamageReports();
     }
+
+    public int getOrCreateDamageReport(int leaseId) {
+        return damageReportRepository.getOrCreateDamageReport(leaseId);
+    }
 }
