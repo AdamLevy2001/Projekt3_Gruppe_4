@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilbageleverede biler</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
     <link rel="stylesheet" th:href="@{/ListeGrid.css}">
 </head>
 <body>
 
-<main class="container">
-    <h1>Tilbageleverede biler</h1>
-    <p>Vælg en bil for at oprette en skadesrapport</p>
-
-    <div th:if="${cars.isEmpty()}" class="info-message">
-        Der er ingen tilbageleverede biler.
+<main>
+    <div class="page-header">
+        <h1>Oversigt</h1>
     </div>
+    <div class="container">
+        <div class="container-header">
+            <h2>Tilbageleverede biler</h2>
+        </div>
 
-    <table th:if="${!cars.isEmpty()}" class="data-table">
-        <thead>
-        <tr>
-            <th>Vognnr.</th>
-            <th>Stelnr.</th>
-            <th>Mærke</th>
-            <th>Model</th>
-            <th>Handling</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="car : ${cars}" class="car-card">
-            <td th:text="${car.vehicle_no}"></td>
-            <td th:text="${car.chassis_no}"></td>
-            <td th:text="${car.brand}"></td>
-            <td th:text="${car.model}"></td>
-            <td>
-                <a th:href="@{/skade/opret-skadesrapport(carId=${car.vehicle_no})}">Opret skadesrapport</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div th:if="${cars.isEmpty()}" class="info-message">
+            Der er ingen tilbageleverede biler.
+        </div>
+        <div class="section" id="tilbageleverede-biler-section">
+            <table th:if="${!cars.isEmpty()}" class="data-table">
+                <thead>
+                <tr>
+                    <th>Vognnr.</th>
+                    <th>Stelnr.</th>
+                    <th>Mærke</th>
+                    <th>Model</th>
+                    <th>Handling</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="car : ${cars}" class="car-card">
+                    <td th:text="${car.vehicleNo}"></td>
+                    <td th:text="${car.chassisNo}"></td>
+                    <td th:text="${car.brand}"></td>
+                    <td th:text="${car.model}"></td>
+                    <td>
+                        <form th:action="@{/skade-udbedring/skadesrapport}" method="get">
+                            <input type="hidden" name="vehicleNo" th:value="${car.vehicleNo}">
+                            <button type="submit">Åben skadesrapport</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 </main>
 </body>
 </html>
