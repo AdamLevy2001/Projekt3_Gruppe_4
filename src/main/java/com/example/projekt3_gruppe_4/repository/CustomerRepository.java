@@ -29,8 +29,31 @@ public class CustomerRepository {
                 customer.setId(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Databasefejl");
+            throw new RuntimeException("Databasefejl", e);
         }
         return customer;
+    }
+
+    public Customer findCustomerByEmail(String email) {
+        String sql = "SELECT * FROM customers WHERE email = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Customer(
+                        resultSet.getInt("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("phone")
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Fejl ved søgning efter kunde med email: " + email, e);
+        }
+        return null;
     }
 }

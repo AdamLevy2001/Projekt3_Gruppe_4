@@ -17,10 +17,14 @@ public class LeaseService {
     LeaseRepository leaseRepository;
 
     public void createLeaseWithCustomer(Customer customer, Lease lease) {
+        Customer existingCustomer = customerRepository.findCustomerByEmail(customer.getEmail());
 
-        Customer createdCustomer = customerRepository.createCustomer(customer);
-
-        lease.setCustomerId(createdCustomer.getId());
+        if (existingCustomer != null) {
+            lease.setCustomerId(existingCustomer.getId());
+        } else {
+            Customer createdCustomer = customerRepository.createCustomer(customer);
+            lease.setCustomerId(createdCustomer.getId());
+        }
 
         leaseRepository.createLease(lease);
     }
