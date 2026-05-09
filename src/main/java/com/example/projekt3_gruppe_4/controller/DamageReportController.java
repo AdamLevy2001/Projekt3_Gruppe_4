@@ -33,7 +33,7 @@ public class DamageReportController {
         int leaseId = leaseService.findLeaseIdByVehicleNo(vehicleNo);
         int damageReportId = damageReportService.getOrCreateDamageReport(leaseId);
         model.addAttribute("damages", damageService.getAllDamagesByReportId(damageReportId));
-        model.addAttribute("vognnummer", vehicleNo);
+        model.addAttribute("vehicleNo", vehicleNo);
         model.addAttribute("damageReportId", damageReportId);
     }
 
@@ -43,7 +43,7 @@ public class DamageReportController {
             return "redirect:/log-ind";
         }
         buildDamageReportModel(vehicleNo, model);
-        model.addAttribute("kanRedigere", true);
+        model.addAttribute("canEdit", true);
         return "skadesrapport";
     }
 
@@ -53,7 +53,7 @@ public class DamageReportController {
             return "redirect:/log-ind";
         }
         buildDamageReportModel(vehicleNo, model);
-        model.addAttribute("kanRedigere", false);
+        model.addAttribute("canEdit", false);
         return "skadesrapport";
     }
 

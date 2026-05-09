@@ -11,7 +11,7 @@ import java.util.List;
 public class DamageService {
 
     @Autowired
-    DamageRepository damagesRepository;
+    DamageRepository damageRepository;
 
     public void registrerDamages(String description, double price, int damageReportId) {
 
@@ -27,14 +27,14 @@ public class DamageService {
             throw new IllegalArgumentException("Pris skal være et positivt tal");
         }
         Damage damages = new Damage(damageReportId, description, price);
-        damagesRepository.saveDamage(damages);
+        damageRepository.saveDamage(damages);
     }
 
     public List<Damage> getAllDamagesByReportId(int damageReportId) {
-        return damagesRepository.getAllDamagesByReportId(damageReportId);
+        return damageRepository.getAllDamagesByReportId(damageReportId);
     }
 
     public void fjernDamage(int damageId) {
-        damagesRepository.deleteDamage(damageId);
+        damageRepository.deleteDamage(damageId);
     }
 }

@@ -2,13 +2,13 @@ package com.example.projekt3_gruppe_4.model;
 
 public class Damage {
 
-    int id;
+    private int id;
 
-    int damageReportId;
+    private int damageReportId;
 
-    String description;
+    private String description;
 
-    double price;
+    private double price;
 
     public Damage(int id, int damageReportId, String description, double price) {
         this.id = id;
