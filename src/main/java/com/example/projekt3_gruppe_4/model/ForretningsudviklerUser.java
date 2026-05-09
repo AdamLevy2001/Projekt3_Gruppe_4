@@ -7,13 +7,13 @@ public class ForretningsudviklerUser extends User {
 
     @Override
     public String getDefaultPage() {
-        return "dashboard";
+        return "forretningsudvikler/udlejede-biler";
     }
 
     @Override
     public boolean hasAccess(String page) {
         return switch (page) {
-            case "udlejede-biler", "showDamageReport", "ledige-biler", "dashboard" -> true;
+            case "forretningsudvikler/udlejede-biler", "forretningsudvikler/skadesrapporter", "forretningsudvikler/skadesrapport" -> true;
             default -> false;
         };
     }

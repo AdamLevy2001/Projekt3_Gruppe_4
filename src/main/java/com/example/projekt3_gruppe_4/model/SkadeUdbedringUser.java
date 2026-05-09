@@ -7,13 +7,13 @@ public class SkadeUdbedringUser extends User {
 
     @Override
     public String getDefaultPage() {
-        return "tilbageleverede-biler";
+        return "skade-udbedring/tilbageleverede-biler";
     }
 
     @Override
     public boolean hasAccess(String page) {
         return switch (page) {
-            case "tilbageleverede-biler", "createDamage", "showDamageReport" -> true;
+            case "skade-udbedring/tilbageleverede-biler", "skade-udbedring/skadesrapport", "skade-udbedring/skadesrapporter" -> true;
             default -> false;
         };
     }
