@@ -56,7 +56,7 @@ main {
     padding: 24px 40px 0;
 }
 
-#ledige-biler-section {
+#ledige-biler-section, #udlejede-biler-section, #tilbageleverede-biler-section {
     flex: 1;
     overflow-y: auto;
     padding: 24px 40px;
