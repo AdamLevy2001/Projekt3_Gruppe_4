@@ -1,13 +1,10 @@
 package com.example.projekt3_gruppe_4.controller;
 
-import com.example.projekt3_gruppe_4.repository.DamageReportRepository;
-import com.example.projekt3_gruppe_4.repository.LeaseRepository;
+import com.example.projekt3_gruppe_4.model.User;
 import com.example.projekt3_gruppe_4.service.DamageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,40 +14,32 @@ public class DamageController {
     @Autowired
     DamageService damageService;
 
-    @Autowired
-    LeaseRepository leaseRepository;
-
-    @Autowired
-    DamageReportRepository damageReportRepository;
-
-    @GetMapping("/createDamage")
-    public String showDamage(@RequestParam int carId, Model model, HttpSession session) {
-        int leaseId = leaseRepository.findLeaseIdByVehicleNo(carId);
-        int damageReportId = damageReportRepository.getOrCreateDamageReport(leaseId);
-        model.addAttribute("damages", damageService.getAllDamagesByReportId(damageReportId));
-        model.addAttribute("vognnummer", carId);
-        model.addAttribute("damageReportId", damageReportId);
-        return "createDamageReport";
+    private boolean isUnauthorized(HttpSession session, String page) {
+        User user = (User) session.getAttribute("loggedInUser");
+        return user == null || !user.hasAccess(page);
     }
 
-    @PostMapping("/createDamage")
+    @PostMapping("/skade-udbedring/skadesrapport/tilfoej-skade")
     public String createDamage(@RequestParam String description,
                                @RequestParam double price,
                                @RequestParam int damageReportId,
-                               @RequestParam int carId) {
+                               @RequestParam int vehicleNo,
+                               HttpSession session) {
+        if (isUnauthorized(session, "skade-udbedring/skadesrapport")) {
+            return "redirect:/log-ind";
+        }
         damageService.registrerDamages(description, price, damageReportId);
-        return "redirect:/createDamage?carId=" + carId;
+        return "redirect:/skade-udbedring/skadesrapport?vehicleNo=" + vehicleNo;
     }
 
-    @PostMapping("/removeDamage")
+    @PostMapping("/skade-udbedring/skadesrapport/fjern-skade")
     public String removeDamage(@RequestParam int damageId,
-                               @RequestParam int carId) {
+                               @RequestParam int vehicleNo,
+                               HttpSession session) {
+        if (isUnauthorized(session, "skade-udbedring/skadesrapport")) {
+            return "redirect:/log-ind";
+        }
         damageService.fjernDamage(damageId);
-        return "redirect:/createDamage?carId=" + carId;
-    }
-
-    @PostMapping("/fininshDamageReport")
-    public String finishDamageReport() {
-        return "redirect:/damageReport";
+        return "redirect:/skade-udbedring/skadesrapport?vehicleNo=" + vehicleNo;
     }
 }

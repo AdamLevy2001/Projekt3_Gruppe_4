@@ -1,27 +1,85 @@
 package com.example.projekt3_gruppe_4.controller;
 
-import com.example.projekt3_gruppe_4.model.DamageReport;
-import com.example.projekt3_gruppe_4.model.DamageReportView;
+import com.example.projekt3_gruppe_4.model.User;
 import com.example.projekt3_gruppe_4.service.DamageReportService;
+import com.example.projekt3_gruppe_4.service.DamageService;
+import com.example.projekt3_gruppe_4.service.LeaseService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class DamageReportController {
 
     @Autowired
+    DamageService damageService;
+
+    @Autowired
     DamageReportService damageReportService;
 
-    @GetMapping("/showDamageReport")
-    public String showDamageReport(Model model) {
+    @Autowired
+    LeaseService leaseService;
 
-        List<DamageReportView> damageReportArraylist = damageReportService.getAllDamageReports();
-        model.addAttribute("damageReports", damageReportArraylist);
-        return "showDamageReport";
+    private boolean isUnauthorized(HttpSession session, String page) {
+        User user = (User) session.getAttribute("loggedInUser");
+        return user == null || !user.hasAccess(page);
+    }
+
+    private void buildDamageReportModel(int vehicleNo, Model model) {
+        int leaseId = leaseService.findLeaseIdByVehicleNo(vehicleNo);
+        int damageReportId = damageReportService.getOrCreateDamageReport(leaseId);
+        model.addAttribute("damages", damageService.getAllDamagesByReportId(damageReportId));
+        model.addAttribute("vognnummer", vehicleNo);
+        model.addAttribute("damageReportId", damageReportId);
+    }
+
+    @GetMapping("/skade-udbedring/skadesrapport")
+    public String showDamageReportSkade(@RequestParam int vehicleNo, Model model, HttpSession session) {
+        if (isUnauthorized(session, "skade-udbedring/skadesrapport")) {
+            return "redirect:/log-ind";
+        }
+        buildDamageReportModel(vehicleNo, model);
+        model.addAttribute("kanRedigere", true);
+        return "skadesrapport";
+    }
+
+    @GetMapping("/forretningsudvikler/skadesrapport")
+    public String showDamageReportForretning(@RequestParam int vehicleNo, Model model, HttpSession session) {
+        if (isUnauthorized(session, "forretningsudvikler/skadesrapport")) {
+            return "redirect:/log-ind";
+        }
+        buildDamageReportModel(vehicleNo, model);
+        model.addAttribute("kanRedigere", false);
+        return "skadesrapport";
+    }
+
+    @PostMapping("/skade-udbedring/skadesrapport/afslut")
+    public String finishDamageReport(HttpSession session) {
+        if (isUnauthorized(session, "skade-udbedring/skadesrapport")) {
+            return "redirect:/log-ind";
+        }
+        return "redirect:/skade-udbedring/tilbageleverede-biler";
+    }
+
+    @GetMapping("/skade-udbedring/skadesrapporter")
+    public String showDamageReportsSkade(Model model, HttpSession session) {
+        if (isUnauthorized(session, "skade-udbedring/skadesrapporter")) {
+            return "redirect:/log-ind";
+        }
+        model.addAttribute("damageReports", damageReportService.getAllDamageReports());
+        return "skadesrapporter";
+    }
+
+    @GetMapping("/forretningsudvikler/skadesrapporter")
+    public String showDamageReportsForretning(Model model, HttpSession session) {
+        if (isUnauthorized(session, "forretningsudvikler/skadesrapporter")) {
+            return "redirect:/log-ind";
+        }
+        model.addAttribute("damageReports", damageReportService.getAllDamageReports());
+        return "skadesrapporter";
     }
 }

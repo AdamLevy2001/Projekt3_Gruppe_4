@@ -1,12 +1,10 @@
 package com.example.projekt3_gruppe_4.controller;
 
-import com.example.projekt3_gruppe_4.model.Car;
-import com.example.projekt3_gruppe_4.model.Customer;
-import com.example.projekt3_gruppe_4.model.DeliveryLocation;
-import com.example.projekt3_gruppe_4.model.Lease;
+import com.example.projekt3_gruppe_4.model.*;
 import com.example.projekt3_gruppe_4.service.CarService;
 import com.example.projekt3_gruppe_4.service.DeliveryLocationService;
 import com.example.projekt3_gruppe_4.service.LeaseService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +26,18 @@ public class LeaseController {
     @Autowired
     DeliveryLocationService deliveryLocationService;
 
-    @GetMapping("/lease/create")
-    public String showCreateLeaseForm(@RequestParam(required = false) Integer carId,
-                                      Model model) {
+    private boolean isUnauthorized(HttpSession session, String page) {
+        User user = (User) session.getAttribute("loggedInUser");
+        return user == null || !user.hasAccess(page);
+    }
+
+    @GetMapping("/dataregistrering/opret-lejeaftale")
+    public String showCreateLeaseForm(@RequestParam(required = false) Integer vehicleNo,
+                                      Model model,
+                                      HttpSession session) {
+        if (isUnauthorized(session, "dataregistrering/opret-lejeaftale")) {
+            return "redirect:/log-ind";
+        }
 
         List<Car> carlist = carService.getAllCars();
         List<DeliveryLocation> locations = deliveryLocationService.getAllDeliveryLocations();
@@ -38,18 +45,16 @@ public class LeaseController {
         model.addAttribute("cars", carlist);
         model.addAttribute("locations", locations);
 
-
-        if (carId!=null) {
-            Car selectedCar = carService.findCarById(carId);
-
+        if (vehicleNo != null) {
+            Car selectedCar = carService.findCarById(vehicleNo);
             model.addAttribute("selectedCar", selectedCar);
         }
 
-        return "create-lease";
+        return "opret-lejeaftale";
     }
 
 
-    @PostMapping("/lease/create")
+    @PostMapping("/dataregistrering/opret-lejeaftale")
     public String createLease(
             @RequestParam String firstName,
             @RequestParam String lastName,
@@ -64,25 +69,32 @@ public class LeaseController {
 
             @RequestParam double downPayment,
             @RequestParam double monthlyPayment,
-            @RequestParam int kmPerMonth
+            @RequestParam int kmPerMonth,
+
+            HttpSession session
     ) {
 
+        if (isUnauthorized(session, "dataregistrering/opret-lejeaftale")) {
+            return "redirect:/log-ind";
+        }
+
         Customer customer = new Customer();
-        customer.setFirst_name(firstName);
-        customer.setLast_name(lastName);
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
         customer.setEmail(email);
         customer.setPhone(phoneNumber);
 
         Lease lease = new Lease();
-        lease.setCarVehicle_no(carVehicleNo);
-        lease.setDeliveryLocation_id(deliveryLocationId);
-        lease.setStart_date(startDate);
-        lease.setEnd_date(startDate.plusMonths(leaseLength));
-        lease.setDown_payment(downPayment);
-        lease.setMonthly_payment(monthlyPayment);
-        lease.setKm_per_month(kmPerMonth);
+        lease.setCarVehicleNo(carVehicleNo);
+        lease.setDeliveryLocationId(deliveryLocationId);
+        lease.setStartDate(startDate);
+        lease.setEndDate(startDate.plusMonths(leaseLength));
+        lease.setDownPayment(downPayment);
+        lease.setMonthlyPayment(monthlyPayment);
+        lease.setKmPerMonth(kmPerMonth);
+        lease.setStatus("active");
 
         leaseService.createLeaseWithCustomer(customer, lease);
-        return "redirect:/lease/create";
+        return "redirect:/dataregistrering/opret-lejeaftale?success=true";
     }
 }
