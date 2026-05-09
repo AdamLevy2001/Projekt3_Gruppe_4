@@ -26,37 +26,43 @@
                     <p>Beskrivelse: <span th:text="${damage.description}"></span></p>
                     <p>Pris: <span th:text="${damage.price}"></span> kr.</p>
                 </div>
-                <form th:action="@{/skade-udbedring/skadesrapport/fjern-skade}" method="post">
-                    <input type="hidden" name="damageId" th:value="${damage.id}">
-                    <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
-                    <button type="submit">
-                        Fjern skade
-                    </button>
-                </form>
+                <div th:if="${kanRedigere}">
+                    <form th:action="@{/skade-udbedring/skadesrapport/fjern-skade}" method="post">
+                        <input type="hidden" name="damageId" th:value="${damage.id}">
+                        <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
+                        <button type="submit">
+                            Fjern skade
+                        </button>
+                    </form>
+                </div>
             </div>
             <hr th:if="${!damages.isEmpty()}">
         </div>
-        <form th:action="@{/skade-udbedring/skadesrapport/tilfoej-skade}" method="post">
-            <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
-            <input type="hidden" name="damageReportId" th:value="${damageReportId}">
-            <div class="section">
-                <div class="form-row">
-                    <label>Skade:</label>
-                    <div class="input-group">
-                        <input type="text" name="description" placeholder="Beskrivelse" required>
+        <div th:if="${kanRedigere}">
+            <form th:action="@{/skade-udbedring/skadesrapport/tilfoej-skade}" method="post">
+                <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
+                <input type="hidden" name="damageReportId" th:value="${damageReportId}">
+                <div class="section">
+                    <div class="form-row">
+                        <label>Skade:</label>
+                        <div class="input-group">
+                            <input type="text" name="description" placeholder="Beskrivelse" required>
+                        </div>
+                        <div class="price-box">
+                            <input type="text" name="price" placeholder="Pris" required>
+                            <span><strong>kr.</strong></span>
+                        </div>
+                        <button type="submit">
+                            Opret skade
+                        </button>
                     </div>
-                    <div class="price-box">
-                        <input type="text" name="price" placeholder="Pris" required>
-                        <span><strong>kr.</strong></span>
-                    </div>
-                    <button type="submit">
-                        Opret skade
-                    </button>
                 </div>
+            </form>
+        </div>
+        <div th:if="${kanRedigere}">
+            <div class="afslut-container">
+                <button type="submit">Afslut skadesrapport</button>
             </div>
-        </form>
-        <div class="afslut-container">
-            <button type="submit">Afslut skadesrapport</button>
         </div>
     </div>
 </main>

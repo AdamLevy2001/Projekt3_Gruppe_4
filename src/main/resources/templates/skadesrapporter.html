@@ -26,7 +26,12 @@
                     <p>Model: <span th:text="${damageReport.model}"></span></p>
                     <p>Kundens navn: <span th:text="${damageReport.firstName + ' ' + damageReport.lastName}"></span></p>
                 </div>
-                <a th:href="@{/skade-udbedring/skadesrapport(vehicleNo=${damageReport.vehicleNo})}">
+                <a th:if="${session.loggedInUser.hasAccess('skade-udbedring/skadesrapporter')}"
+                   th:href="@{/skade-udbedring/skadesrapport(vehicleNo=${damageReport.vehicleNo})}">
+                    <button>Åben skadesrapport</button>
+                </a>
+                <a th:if="${session.loggedInUser.hasAccess('forretningsudvikler/skadesrapporter')}"
+                   th:href="@{/forretningsudvikler/skadesrapport(vehicleNo=${damageReport.vehicleNo})}">
                     <button>Åben skadesrapport</button>
                 </a>
             </div>
