@@ -13,6 +13,6 @@ public class PageController {
         if (user != null) {
             return "redirect:" + user.getDefaultPage();
         }
-        return "redirect:/login";
+        return "redirect:/log-ind";
     }
 }

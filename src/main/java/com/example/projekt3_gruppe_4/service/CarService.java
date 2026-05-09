@@ -17,8 +17,12 @@ public class CarService {
         return carRepository.findReturned();
     }
 
-    public List<Car> getAllCars(){
+    public List<Car> getAllCars() {
         return carRepository.getAllCars();
+    }
+
+    public Car findCarById(int vehicleNo) {
+        return carRepository.findCarById(vehicleNo);
     }
 
     public List<Car> getLeasedCars() {

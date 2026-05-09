@@ -26,7 +26,7 @@
                     <p>Model: <span th:text="${damageReport.model}"></span></p>
                     <p>Kundens navn: <span th:text="${damageReport.firstName + ' ' + damageReport.lastName}"></span></p>
                 </div>
-                <a th:href="@{/createDamage(carId=${damageReport.vehicle_no})}">
+                <a th:href="@{/skade-udbedring/skadesrapport(vehicleNo=${damageReport.vehicleNo})}">
                     <button>Åben skadesrapport</button>
                 </a>
             </div>

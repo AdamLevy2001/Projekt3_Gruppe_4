@@ -25,25 +25,25 @@ public class LeaseRepository {
                     PreparedStatement updateStatement = connection.prepareStatement(updateCarSql);
             ) {
 
-                insertStatement.setInt(1, lease.getCarVehicle_no());
-                insertStatement.setInt(2, lease.getCustomer_id());
-                insertStatement.setInt(3, lease.getDeliveryLocation_id());
-                insertStatement.setDouble(4, lease.getDown_payment());
-                insertStatement.setDouble(5, lease.getMonthly_payment());
-                insertStatement.setInt(6, lease.getKm_per_month());
-                insertStatement.setDate(7, Date.valueOf(lease.getStart_date()));
-                insertStatement.setDate(8, Date.valueOf(lease.getEnd_date()));
+                insertStatement.setInt(1, lease.getCarVehicleNo());
+                insertStatement.setInt(2, lease.getCustomerId());
+                insertStatement.setInt(3, lease.getDeliveryLocationId());
+                insertStatement.setDouble(4, lease.getDownPayment());
+                insertStatement.setDouble(5, lease.getMonthlyPayment());
+                insertStatement.setInt(6, lease.getKmPerMonth());
+                insertStatement.setDate(7, Date.valueOf(lease.getStartDate()));
+                insertStatement.setDate(8, Date.valueOf(lease.getEndDate()));
                 insertStatement.setString(9, lease.getStatus());
 
                 insertStatement.executeUpdate();
 
-                updateStatement.setInt(1, lease.getCarVehicle_no());
+                updateStatement.setInt(1, lease.getCarVehicleNo());
                 updateStatement.executeUpdate();
 
                 connection.commit();
             } catch (SQLException e) {
                 connection.rollback();
-                throw new RuntimeException("fejl ved oprettelsen af lejeaftale!");
+                throw new RuntimeException("Fejl ved oprettelsen af lejeaftale!", e);
             }
 
         } catch (SQLException e) {
@@ -51,12 +51,12 @@ public class LeaseRepository {
         }
     }
 
-    public int findLeaseIdByVehicleNo(int vehicle_no) {
-        String sql = "SELECT id FROM leases WHERE carVehicle_no = ? AND status = 'active'";
+    public int findLeaseIdByVehicleNo(int vehicleNo) {
+        String sql = "SELECT id FROM leases WHERE carVehicle_no = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, vehicle_no);
+            statement.setInt(1, vehicleNo);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -67,6 +67,6 @@ public class LeaseRepository {
             throw new RuntimeException("Database fejl ved hentning af lejeaftale", e);
         }
 
-        throw new RuntimeException("Ingen aktiv lejeaftale fundet for bil: " + vehicle_no);
+        throw new RuntimeException("Ingen lejeaftale fundet for bil: " + vehicleNo);
     }
 }

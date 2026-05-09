@@ -20,8 +20,12 @@ public class LeaseService {
 
         Customer createdCustomer = customerRepository.createCustomer(customer);
 
-        lease.setCustomer_id(createdCustomer.getId());
+        lease.setCustomerId(createdCustomer.getId());
 
         leaseRepository.createLease(lease);
+    }
+
+    public int findLeaseIdByVehicleNo(int vehicleNo) {
+        return leaseRepository.findLeaseIdByVehicleNo(vehicleNo);
     }
 }

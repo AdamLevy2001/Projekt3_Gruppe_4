@@ -12,7 +12,7 @@ public class DeliveryLocationService {
     @Autowired
     DeliveryLocationRepository deliveryLocationRepository;
 
-    public List<DeliveryLocation> getAllDeliveryLocations(){
+    public List<DeliveryLocation> getAllDeliveryLocations() {
         return deliveryLocationRepository.getAllDeliveryLocations();
     }
 }

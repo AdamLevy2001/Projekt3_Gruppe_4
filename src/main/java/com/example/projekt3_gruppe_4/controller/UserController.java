@@ -15,14 +15,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
+    @GetMapping("/log-ind")
     public String loginPage() {
-        return "login";
+        return "log-ind";
     }
 
-    @PostMapping("/login")
-    public String postLogin(@RequestParam("username") String username,
-                            @RequestParam("password") String password,
+    @PostMapping("/log-ind")
+    public String postLogin(@RequestParam String username,
+                            @RequestParam String password,
                             Model model,
                             HttpSession session) {
         try {
@@ -32,13 +32,13 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("username", username);
             model.addAttribute("errorMessage", e.getMessage());
-            return "login";
+            return "log-ind";
         }
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/log-ud")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login";
+        return "redirect:/log-ind";
     }
 }

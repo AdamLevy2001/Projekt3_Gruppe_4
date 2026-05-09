@@ -1,3 +1,7 @@
+.container {
+    overflow-y: auto;
+}
+
 .form-row {
     display: flex;
     align-items: center;

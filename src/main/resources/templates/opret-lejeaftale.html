@@ -18,10 +18,14 @@
         <div class="container-header">
             <h2>Opret ny lejeaftale</h2>
         </div>
-        <form th:action="@{/lease/create}" method="post">
+        <form th:action="@{/dataregistrering/opret-lejeaftale}" method="post">
 
 
             <div class="section">
+                <div th:if="${param.success}" class="success-message">
+                    Lejeaftalen er oprettet!
+                    <br>
+                </div>
 
                 <h3>Kundeinformation</h3>
 
@@ -72,8 +76,9 @@
                         <option value="">-- Vælg bil --</option>
 
                         <option th:each="car : ${cars}"
-                                th:value="${car.vehicle_no}"
-                                th:text="${car.brand + ' ' + car.model}">
+                                th:value="${car.vehicleNo}"
+                                th:text="${car.brand + ' ' + car.model}"
+                                th:selected="${selectedCar != null and car.vehicleNo == selectedCar.vehicleNo}">
                         </option>
 
                     </select>

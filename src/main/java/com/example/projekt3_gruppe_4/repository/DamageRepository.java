@@ -24,7 +24,7 @@ public class DamageRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, damage.getDamageReportID());
+            statement.setInt(1, damage.getDamageReportId());
             statement.setString(2, damage.getDescription());
             statement.setDouble(3, damage.getPrice());
 
