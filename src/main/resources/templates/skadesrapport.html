@@ -23,9 +23,9 @@
                     <p>Beskrivelse: <span th:text="${damage.description}"></span></p>
                     <p>Pris: <span th:text="${damage.price}"></span> kr.</p>
                 </div>
-                <form th:action="@{/removeDamage}" method="post">
+                <form th:action="@{/skade-udbedring/skadesrapport/fjern-skade}" method="post">
                     <input type="hidden" name="damageId" th:value="${damage.id}">
-                    <input type="hidden" name="carId" th:value="${vognnummer}">
+                    <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
                     <button type="submit">
                         Fjern skade
                     </button>
@@ -33,8 +33,8 @@
             </div>
             <hr th:if="${!damages.isEmpty()}">
         </div>
-        <form th:action="@{/createDamage}" method="post">
-            <input type="hidden" name="carId" th:value="${vognnummer}">
+        <form th:action="@{/skade-udbedring/skadesrapport/tilfoej-skade}" method="post">
+            <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
             <input type="hidden" name="damageReportId" th:value="${damageReportId}">
             <div class="section">
                 <div class="form-row">
