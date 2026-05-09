@@ -3,6 +3,7 @@ package com.example.projekt3_gruppe_4.repository;
 import com.example.projekt3_gruppe_4.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,11 +29,11 @@ public class CarRepository {
 
             while (rs.next()) {
                 Car car = new Car();
-                car.setVehicle_no(rs.getInt("vehicle_no"));
-                car.setChassis_no(rs.getString("chassis_no"));
+                car.setVehicleNo(rs.getInt("vehicle_no"));
+                car.setChassisNo(rs.getString("chassis_no"));
                 car.setBrand(rs.getString("brand"));
                 car.setModel(rs.getString("model"));
-                car.setPurchase_price(rs.getDouble("purchase_price"));
+                car.setPurchasePrice(rs.getDouble("purchase_price"));
                 car.setStatus(rs.getString("status"));
                 cars.add(car);
             }
@@ -68,12 +69,12 @@ public class CarRepository {
         return carList;
     }
 
-    public Car findCarById(int carId) {
+    public Car findCarById(int vehicleNo) {
         String sql = "SELECT * FROM cars WHERE vehicle_no = ?";
 
         try (Connection connection = dataSource.getConnection();
-        PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, carId);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, vehicleNo);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 Car car = new Car(
@@ -103,11 +104,11 @@ public class CarRepository {
 
             while (rs.next()) {
                 Car car = new Car();
-                car.setVehicle_no(rs.getInt("vehicle_no"));
-                car.setChassis_no(rs.getString("chassis_no"));
+                car.setVehicleNo(rs.getInt("vehicle_no"));
+                car.setChassisNo(rs.getString("chassis_no"));
                 car.setBrand(rs.getString("brand"));
                 car.setModel(rs.getString("model"));
-                car.setPurchase_price(rs.getDouble("purchase_price"));
+                car.setPurchasePrice(rs.getDouble("purchase_price"));
                 car.setStatus(rs.getString("status"));
                 cars.add(car);
             }

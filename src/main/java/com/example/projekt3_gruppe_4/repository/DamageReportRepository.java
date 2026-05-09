@@ -27,8 +27,8 @@ public class DamageReportRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, damageReports.getLease_id());
-            statement.setDate(2, java.sql.Date.valueOf(damageReports.getCreated_at()));
+            statement.setInt(1, damageReports.getLeaseId());
+            statement.setDate(2, java.sql.Date.valueOf(damageReports.getCreatedAt()));
 
             statement.executeUpdate();
         } catch (SQLException e) {
