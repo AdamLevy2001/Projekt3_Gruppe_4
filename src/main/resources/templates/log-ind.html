@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Log ind</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
     <link rel="stylesheet" th:href="@{/loginStyle.css}">
 </head>
 <body>
 <header>
-
+    <div th:replace="~{fragment :: navbar}"></div>
 </header>
 <main>
     <div class="login-container">
