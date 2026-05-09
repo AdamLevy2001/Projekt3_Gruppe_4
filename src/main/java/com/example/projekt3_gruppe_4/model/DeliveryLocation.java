@@ -5,33 +5,33 @@ public class DeliveryLocation {
     private String address;
     private String name;
 
-    public DeliveryLocation(int id, String address, String name){
+    public DeliveryLocation(int id, String address, String name) {
         this.id = id;
         this.address = address;
         this.name = name;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address){
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 }
