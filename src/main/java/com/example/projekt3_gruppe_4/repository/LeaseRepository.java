@@ -47,7 +47,7 @@ public class LeaseRepository {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Database fejl");
+            throw new RuntimeException("Database fejl", e);
         }
     }
 
