@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class DamageReport {
     private int id;
-    private int lease_id;
-    private LocalDate created_at;
+    private int leaseId;
+    private LocalDate createdAt;
 
-    public DamageReport(int id, int lease_id, LocalDate created_at) {
+    public DamageReport(int id, int leaseId, LocalDate createdAt) {
         this.id = id;
-        this.lease_id = lease_id;
-        this.created_at = created_at;
+        this.leaseId = leaseId;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -21,19 +21,19 @@ public class DamageReport {
         this.id = id;
     }
 
-    public int getLease_id() {
-        return lease_id;
+    public int getLeaseId() {
+        return leaseId;
     }
 
-    public void setLease_id(int lease_id) {
-        this.lease_id = lease_id;
+    public void setLeaseId(int leaseId) {
+        this.leaseId = leaseId;
     }
 
-    public LocalDate getCreated_at() {
-        return created_at;
+    public LocalDate getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(LocalDate created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -1,40 +1,40 @@
 package com.example.projekt3_gruppe_4.model;
 
 public class Car {
-    private int vehicle_no;
-    private String chassis_no;
+    private int vehicleNo;
+    private String chassisNo;
     private String brand;
     private String model;
-    private double purchase_price;
+    private double purchasePrice;
     private String status;
 
-    public Car(){
+    public Car() {
 
     }
 
-    public Car(int vehicle_no, String chassis_no, String brand, String model, double purchase_price, String status) {
-        this.vehicle_no = vehicle_no;
-        this.chassis_no = chassis_no;
+    public Car(int vehicleNo, String chassisNo, String brand, String model, double purchasePrice, String status) {
+        this.vehicleNo = vehicleNo;
+        this.chassisNo = chassisNo;
         this.brand = brand;
         this.model = model;
-        this.purchase_price = purchase_price;
+        this.purchasePrice = purchasePrice;
         this.status = status;
     }
 
-    public int getVehicle_no() {
-        return vehicle_no;
+    public int getVehicleNo() {
+        return vehicleNo;
     }
 
-    public void setVehicle_no(int vehicle_no) {
-        this.vehicle_no = vehicle_no;
+    public void setVehicleNo(int vehicleNo) {
+        this.vehicleNo = vehicleNo;
     }
 
-    public String getChassis_no() {
-        return chassis_no;
+    public String getChassisNo() {
+        return chassisNo;
     }
 
-    public void setChassis_no(String chassis_no) {
-        this.chassis_no = chassis_no;
+    public void setChassisNo(String chassisNo) {
+        this.chassisNo = chassisNo;
     }
 
     public String getBrand() {
@@ -53,12 +53,12 @@ public class Car {
         this.model = model;
     }
 
-    public double getPurchase_price() {
-        return purchase_price;
+    public double getPurchasePrice() {
+        return purchasePrice;
     }
 
-    public void setPurchase_price(double purchase_price) {
-        this.purchase_price = purchase_price;
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
 
     public String getStatus() {

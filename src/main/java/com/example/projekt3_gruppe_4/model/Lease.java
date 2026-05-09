@@ -4,28 +4,28 @@ import java.time.LocalDate;
 
 public class Lease {
     private int id;
-    private int carVehicle_no;
-    private int customer_id;
-    private int deliveryLocation_id;
-    private double down_payment;
-    private double monthly_payment;
-    private int km_per_month;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private int carVehicleNo;
+    private int customerId;
+    private int deliveryLocationId;
+    private double downPayment;
+    private double monthlyPayment;
+    private int kmPerMonth;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String status;
 
-    public Lease(int id, int carVehicle_no, int customer_id, int deliveryLocation_id,
-                 double down_payment, double monthly_payment, int km_per_month,
-                 LocalDate start_date, LocalDate end_date, String status) {
+    public Lease(int id, int carVehicleNo, int customerId, int deliveryLocationId,
+                 double downPayment, double monthlyPayment, int kmPerMonth,
+                 LocalDate startDate, LocalDate endDate, String status) {
         this.id = id;
-        this.carVehicle_no = carVehicle_no;
-        this.customer_id = customer_id;
-        this.deliveryLocation_id = deliveryLocation_id;
-        this.down_payment = down_payment;
-        this.monthly_payment = monthly_payment;
-        this.km_per_month = km_per_month;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.carVehicleNo = carVehicleNo;
+        this.customerId = customerId;
+        this.deliveryLocationId = deliveryLocationId;
+        this.downPayment = downPayment;
+        this.monthlyPayment = monthlyPayment;
+        this.kmPerMonth = kmPerMonth;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
     }
 
@@ -40,68 +40,68 @@ public class Lease {
         this.id = id;
     }
 
-    public int getCarVehicle_no() {
-        return carVehicle_no;
+    public int getCarVehicleNo() {
+        return carVehicleNo;
     }
 
-    public void setCarVehicle_no(int carVehicle_no) {
-        this.carVehicle_no = carVehicle_no;
+    public void setCarVehicleNo(int carVehicleNo) {
+        this.carVehicleNo = carVehicleNo;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public int getDeliveryLocation_id() {
-        return deliveryLocation_id;
+    public int getDeliveryLocationId() {
+        return deliveryLocationId;
     }
 
-    public void setDeliveryLocation_id(int deliveryLocation_id) {
-        this.deliveryLocation_id = deliveryLocation_id;
+    public void setDeliveryLocationId(int deliveryLocationId) {
+        this.deliveryLocationId = deliveryLocationId;
     }
 
-    public double getDown_payment() {
-        return down_payment;
+    public double getDownPayment() {
+        return downPayment;
     }
 
-    public void setDown_payment(double down_payment) {
-        this.down_payment = down_payment;
+    public void setDownPayment(double downPayment) {
+        this.downPayment = downPayment;
     }
 
-    public double getMonthly_payment() {
-        return monthly_payment;
+    public double getMonthlyPayment() {
+        return monthlyPayment;
     }
 
-    public void setMonthly_payment(double monthly_payment) {
-        this.monthly_payment = monthly_payment;
+    public void setMonthlyPayment(double monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
     }
 
-    public int getKm_per_month() {
-        return km_per_month;
+    public int getKmPerMonth() {
+        return kmPerMonth;
     }
 
-    public void setKm_per_month(int km_per_month) {
-        this.km_per_month = km_per_month;
+    public void setKmPerMonth(int kmPerMonth) {
+        this.kmPerMonth = kmPerMonth;
     }
 
-    public LocalDate getStart_date() {
-        return start_date;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(LocalDate start_date) {
-        this.start_date = start_date;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getEnd_date() {
-        return end_date;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(LocalDate end_date) {
-        this.end_date = end_date;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getStatus() {

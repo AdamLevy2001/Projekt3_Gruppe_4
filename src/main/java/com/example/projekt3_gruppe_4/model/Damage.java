@@ -4,15 +4,15 @@ public class Damage {
 
     int id;
 
-    int damageReportID;
+    int damageReportId;
 
     String description;
 
     double price;
 
-    public Damage(int id, int damageReportID, String description, double price) {
+    public Damage(int id, int damageReportId, String description, double price) {
         this.id = id;
-        this.damageReportID = damageReportID;
+        this.damageReportId = damageReportId;
         this.description = description;
         this.price = price;
     }
@@ -22,10 +22,10 @@ public class Damage {
         this.price = price;
     }
 
-    public Damage(int damageReportID, String description, double price) {
-        this.damageReportID=damageReportID;
-        this.description=description;
-        this.price=price;
+    public Damage(int damageReportId, String description, double price) {
+        this.damageReportId = damageReportId;
+        this.description = description;
+        this.price = price;
     }
 
     public int getId() {
@@ -36,12 +36,12 @@ public class Damage {
         this.id = id;
     }
 
-    public int getDamageReportID() {
-        return damageReportID;
+    public int getDamageReportId() {
+        return damageReportId;
     }
 
-    public void setDamageReportID(int damageReportID) {
-        this.damageReportID = damageReportID;
+    public void setDamageReportId(int damageReportId) {
+        this.damageReportId = damageReportId;
     }
 
     public String getDescription() {
