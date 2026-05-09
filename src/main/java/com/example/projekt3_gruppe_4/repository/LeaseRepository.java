@@ -52,7 +52,7 @@ public class LeaseRepository {
     }
 
     public int findLeaseIdByVehicleNo(int vehicleNo) {
-        String sql = "SELECT id FROM leases WHERE carVehicle_no = ? AND status = 'completed'";
+        String sql = "SELECT id FROM leases WHERE carVehicle_no = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -67,6 +67,6 @@ public class LeaseRepository {
             throw new RuntimeException("Database fejl ved hentning af lejeaftale", e);
         }
 
-        throw new RuntimeException("Ingen aktiv lejeaftale fundet for bil: " + vehicleNo);
+        throw new RuntimeException("Ingen lejeaftale fundet for bil: " + vehicleNo);
     }
 }
