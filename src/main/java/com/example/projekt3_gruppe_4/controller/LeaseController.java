@@ -71,30 +71,37 @@ public class LeaseController {
             @RequestParam double monthlyPayment,
             @RequestParam int kmPerMonth,
 
-            HttpSession session
+            HttpSession session,
+            Model model
     ) {
 
         if (isUnauthorized(session, "dataregistrering/opret-lejeaftale")) {
             return "redirect:/log-ind";
         }
 
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setEmail(email);
-        customer.setPhone(phoneNumber);
-
-        Lease lease = new Lease();
-        lease.setCarVehicleNo(carVehicleNo);
-        lease.setDeliveryLocationId(deliveryLocationId);
-        lease.setStartDate(startDate);
-        lease.setEndDate(startDate.plusMonths(leaseLength));
-        lease.setDownPayment(downPayment);
-        lease.setMonthlyPayment(monthlyPayment);
-        lease.setKmPerMonth(kmPerMonth);
-        lease.setStatus("active");
-
-        leaseService.createLeaseWithCustomer(customer, lease);
-        return "redirect:/dataregistrering/opret-lejeaftale?success=true";
+        try {
+            leaseService.createLeaseWithCustomer(
+                    firstName, lastName, email, phoneNumber,
+                    carVehicleNo, deliveryLocationId,
+                    startDate, leaseLength,
+                    downPayment, monthlyPayment, kmPerMonth);
+            return "redirect:/dataregistrering/opret-lejeaftale?success=true";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("cars", carService.getAllCars());
+            model.addAttribute("locations", deliveryLocationService.getAllDeliveryLocations());
+            model.addAttribute("firstName", firstName);
+            model.addAttribute("lastName", lastName);
+            model.addAttribute("email", email);
+            model.addAttribute("phoneNumber", phoneNumber);
+            model.addAttribute("carVehicleNo", carVehicleNo);
+            model.addAttribute("deliveryLocationId", deliveryLocationId);
+            model.addAttribute("startDate", startDate);
+            model.addAttribute("leaseLength", leaseLength);
+            model.addAttribute("downPayment", downPayment);
+            model.addAttribute("monthlyPayment", monthlyPayment);
+            model.addAttribute("kmPerMonth", kmPerMonth);
+            return "opret-lejeaftale";
+        }
     }
 }

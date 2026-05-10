@@ -5,12 +5,20 @@
     padding-bottom: 20px;
 }
 
+#customer-section {
+    padding-top: 10px;
+}
+
 .form-row select {
     width: 967px;
     height: 40px;
     background-color: white;
     border-radius: 8px;
     border: 1px solid #ddd;
+}
+
+#startDate-form-row {
+    margin-bottom: 0;
 }
 
 input[type="date"] {

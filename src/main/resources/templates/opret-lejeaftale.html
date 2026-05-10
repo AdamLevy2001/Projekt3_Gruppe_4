@@ -21,9 +21,13 @@
         <form th:action="@{/dataregistrering/opret-lejeaftale}" method="post">
 
 
-            <div class="section">
+            <div class="section" id="customer-section">
                 <div th:if="${param.success}" class="success-message">
-                    Lejeaftalen er oprettet!
+                    <p>Lejeaftalen er oprettet!</p>
+                    <br>
+                </div>
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
                     <br>
                 </div>
 
@@ -35,6 +39,7 @@
                         <label>Fornavn</label>
                         <input type="text"
                                name="firstName"
+                               th:value="${firstName}"
                                placeholder="Fornavn"
                                required>
                     </div>
@@ -43,6 +48,7 @@
                         <label>Efternavn</label>
                         <input type="text"
                                name="lastName"
+                               th:value="${lastName}"
                                placeholder="Efternavn"
                                required>
                     </div>
@@ -51,6 +57,7 @@
                         <label>Email</label>
                         <input type="email"
                                name="email"
+                               th:value="${email}"
                                placeholder="Email"
                                required>
                     </div>
@@ -59,6 +66,7 @@
                         <label>Tel.nr.</label>
                         <input type="text"
                                name="phoneNumber"
+                               th:value="${phoneNumber}"
                                placeholder="Telefonnummer"
                                required>
                     </div>
@@ -78,7 +86,7 @@
                         <option th:each="car : ${cars}"
                                 th:value="${car.vehicleNo}"
                                 th:text="${car.brand + ' ' + car.model}"
-                                th:selected="${selectedCar != null and car.vehicleNo == selectedCar.vehicleNo}">
+                                th:selected="${(selectedCar != null and car.vehicleNo == selectedCar.vehicleNo) || car.vehicleNo == carVehicleNo}">
                         </option>
 
                     </select>
@@ -92,7 +100,8 @@
 
                         <option th:each="loc : ${locations}"
                                 th:value="${loc.id}"
-                                th:text="${loc.name}">
+                                th:text="${loc.name}"
+                                th:selected="${loc.id == deliveryLocationId}">
                         </option>
 
                     </select>
@@ -102,10 +111,10 @@
                     <label>Abonnementslængde:</label>
 
                     <select name="leaseLength" required>
-                        <option value="3">3 mdr.</option>
-                        <option value="6">6 mdr.</option>
-                        <option value="12">12 mdr.</option>
-                        <option value="24">24 mdr.</option>
+                        <option value="3" th:selected="${leaseLength == 3}">3 mdr.</option>
+                        <option value="6" th:selected="${leaseLength == 6}">6 mdr.</option>
+                        <option value="12" th:selected="${leaseLength == 12}">12 mdr.</option>
+                        <option value="24" th:selected="${leaseLength == 24}">24 mdr.</option>
                     </select>
                 </div>
 
@@ -113,22 +122,23 @@
                     <label>Kilometer pr. måned:</label>
 
                     <select name="kmPerMonth" required>
-                        <option value="1500">1.500 km</option>
-                        <option value="1750">1.750 km</option>
-                        <option value="2000">2.000 km</option>
-                        <option value="2500">2.500 km</option>
-                        <option value="3000">3.000 km</option>
-                        <option value="3500">3.500 km</option>
-                        <option value="4000">4.000 km</option>
-                        <option value="4500">4.500 km</option>
+                        <option value="1500" th:selected="${kmPerMonth == 1500}">1.500 km</option>
+                        <option value="1750" th:selected="${kmPerMonth == 1750}">1.750 km</option>
+                        <option value="2000" th:selected="${kmPerMonth == 2000}">2.000 km</option>
+                        <option value="2500" th:selected="${kmPerMonth == 2500}">2.500 km</option>
+                        <option value="3000" th:selected="${kmPerMonth == 3000}">3.000 km</option>
+                        <option value="3500" th:selected="${kmPerMonth == 3500}">3.500 km</option>
+                        <option value="4000" th:selected="${kmPerMonth == 4000}">4.000 km</option>
+                        <option value="4500" th:selected="${kmPerMonth == 4500}">4.500 km</option>
                     </select>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row" id="startDate-form-row">
                     <label>Start dato:</label>
 
                     <input type="date"
                            name="startDate"
+                           th:value="${startDate}"
                            required>
                 </div>
 
@@ -145,6 +155,7 @@
                         <div class="price-box">
                             <input type="number"
                                    name="downPayment"
+                                   th:value="${downPayment}"
                                    placeholder="Indtast beløb"
                                    required>
 
@@ -158,6 +169,7 @@
                         <div class="price-box">
                             <input type="number"
                                    name="monthlyPayment"
+                                   th:value="${monthlyPayment}"
                                    placeholder="Indtast beløb"
                                    required>
 

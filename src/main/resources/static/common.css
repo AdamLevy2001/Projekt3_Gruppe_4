@@ -85,7 +85,7 @@ main {
 }
 
 #create-lease-container{
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 /* Header i container */
