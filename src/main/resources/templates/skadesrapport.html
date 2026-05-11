@@ -12,7 +12,7 @@
 </header>
 <main>
     <div class="page-header">
-        <h1>Skade og udbedring</h1>
+        <h1 th:text="${session.loggedInUser.getRoleDisplayName()}"></h1>
     </div>
     <div class="container">
         <div class="container-header">
@@ -40,7 +40,7 @@
         </div>
         <div th:if="${canEdit}">
             <form th:action="@{/skade-udbedring/skadesrapport/tilfoej-skade}" method="post">
-                <input type="hidden" name="vehicleNo" th:value="${vognnummer}">
+                <input type="hidden" name="vehicleNo" th:value="${vehicleNo}">
                 <input type="hidden" name="damageReportId" th:value="${damageReportId}">
                 <div class="section">
                     <div class="form-row">
