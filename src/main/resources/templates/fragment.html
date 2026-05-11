@@ -24,6 +24,10 @@
                th:href="@{/skade-udbedring/skadesrapporter}">
                 <button>Skadesrapporter</button>
             </a>
+            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('forretningsudvikler/dashboard')}"
+               th:href="@{/forretningsudvikler/dashboard}">
+                <button>Dashboard</button>
+            </a>
             <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('forretningsudvikler/udlejede-biler')}"
                th:href="@{/forretningsudvikler/udlejede-biler}">
                 <button>Udlejede biler</button>
