@@ -17,4 +17,9 @@ public class ForretningsudviklerUser extends User {
             default -> false;
         };
     }
+
+    @Override
+    public String getRoleDisplayName() {
+        return "Forretningsudvikler";
+    }
 }

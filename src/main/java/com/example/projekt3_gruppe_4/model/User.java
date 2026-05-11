@@ -52,4 +52,8 @@ public class User {
     public boolean hasAccess(String page) {
         return false;
     }
+
+    public String getRoleDisplayName() {
+        return "Bruger";
+    }
 }

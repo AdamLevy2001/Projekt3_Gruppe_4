@@ -17,4 +17,9 @@ public class SkadeUdbedringUser extends User {
             default -> false;
         };
     }
+
+    @Override
+    public String getRoleDisplayName() {
+        return "Skade og udbedring";
+    }
 }

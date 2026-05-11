@@ -17,4 +17,9 @@ public class DataregisteringUser extends User {
             default -> false;
         };
     }
+
+    @Override
+    public String getRoleDisplayName() {
+        return "Dataregistrering";
+    }
 }
