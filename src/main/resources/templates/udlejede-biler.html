@@ -23,28 +23,29 @@
             Der er ingen udlejede biler.
         </div>
         <div class="section" id="udlejede-biler-section">
-        <table th:unless="${cars.isEmpty()}" class="data-table">
-            <thead>
-            <tr>
-                <th>Vognnr.</th>
-                <th>Stelnr.</th>
-                <th>Mærke</th>
-                <th>Model</th>
-                <th>Pris</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="car : ${cars}">
-                <td th:text="${car.vehicleNo}"></td>
-                <td th:text="${car.chassisNo}"></td>
-                <td th:text="${car.brand}"></td>
-                <td th:text="${car.model}"></td>
-                <td th:text="${car.purchasePrice} + ' kr.'"></td>
-                <td th:text="${car.status}"></td>
-            </tr>
-            </tbody>
-        </table>
+            <table th:unless="${cars.isEmpty()}" class="data-table">
+                <thead>
+                <tr>
+                    <th>Vognnr.</th>
+                    <th>Stelnr.</th>
+                    <th>Mærke</th>
+                    <th>Model</th>
+                    <th>Pris</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="car : ${cars}">
+                    <td th:text="${car.vehicleNo}"></td>
+                    <td th:text="${car.chassisNo}"></td>
+                    <td th:text="${car.brand}"></td>
+                    <td th:text="${car.model}"></td>
+                    <td th:text="${car.purchasePrice} + ' kr.'"></td>
+                    <td th:text="${car.status}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 </body>
