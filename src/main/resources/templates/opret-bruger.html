@@ -13,8 +13,10 @@
     <div th:replace="~{fragment :: navbar}"></div>
 </header>
 <main>
-<div class="container">
-    <h1>Opret bruger</h1>
+<div class="create-user-wrapper">
+    <div class="container-header">
+        <h1>Opret bruger</h1>
+    </div>
 
     <div class="card">
         <form th:action="@{/admin/opret-bruger}" method="post">

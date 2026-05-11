@@ -1,21 +1,30 @@
-.container {
+.create-user-wrapper {
     overflow: auto;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px);
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
     max-width: 500px;
-    margin: 0 auto;
+    width: 100%;
+}
+
+.card form {
+    padding: 30px 40px;
+    background-color: white;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 11px 34px rgba(0, 0, 0, .25);
+    border: 1px solid #DFE9FA;
+    border-top: none;
 }
 
 h1 {
     font-size: 28px;
     text-align: center;
-    margin-bottom: 20px;
     font-weight: bold;
 }
 
@@ -61,13 +70,12 @@ button {
     border-radius: 4px;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    background-color: #f0f2f5;
-}
-
-main {
-    min-height: calc(100vh - 80px);
-    background-color: #f0f2f5;
+.container-header {
+    background: linear-gradient(to right, #F3F7FD, #F1F6FE);
+    padding: 20px 40px;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #DFE9FA;
+    border-bottom: 3px solid #DFE9FA;
+    width: 100%;
+    max-width: 500px;
 }
