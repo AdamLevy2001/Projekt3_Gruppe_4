@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Opret Skadesrapport</title>
+    <title>Skadesrapport</title>
     <link rel="stylesheet" th:href="@{/common.css}">
     <link rel="stylesheet" th:href="@{/createDamageReport.css}">
     <link rel="icon" th:href="@{/images/BILABONNEMENT_favicon.svg}" type="image/png">
@@ -17,7 +17,7 @@
     </div>
     <div class="container">
         <div class="container-header">
-            <h2>Opret skadesrapport</h2>
+            <h2>Skadesrapport</h2>
             <h2><strong>Vognnummer: </strong><span th:text="${vehicleNo}"></span></h2>
         </div>
         <div class="section">
@@ -60,10 +60,13 @@
                 </div>
             </form>
         </div>
-        <div th:if="${canEdit}">
-            <div class="afslut-container">
-                <button type="submit">Afslut skadesrapport</button>
-            </div>
+        <div class="afslut-container">
+            <a th:if="${canEdit}" th:href="@{/skade-udbedring/tilbageleverede-biler}">
+                <button type="button">Tilbage</button>
+            </a>
+            <a th:if="${!canEdit}" th:href="@{/forretningsudvikler/skadesrapporter}">
+                <button type="button">Tilbage</button>
+            </a>
         </div>
     </div>
 </main>
