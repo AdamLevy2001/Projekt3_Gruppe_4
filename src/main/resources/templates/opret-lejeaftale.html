@@ -12,7 +12,7 @@
 </header>
 <main>
     <div class="page-header">
-        <h1>Dataregistrering</h1>
+        <h1 th:text="${session.loggedInUser.getRoleDisplayName()}"></h1>
     </div>
     <div class="container" id="create-lease-container">
         <div class="container-header">
@@ -86,7 +86,7 @@
                         <option th:each="car : ${cars}"
                                 th:value="${car.vehicleNo}"
                                 th:text="${car.brand + ' ' + car.model}"
-                                th:selected="${(selectedCar != null and car.vehicleNo == selectedCar.vehicleNo) || car.vehicleNo == carVehicleNo}">
+                                th:selected="${(selectedCar != null && car.vehicleNo == selectedCar.vehicleNo) || car.vehicleNo == carVehicleNo}">
                         </option>
 
                     </select>
