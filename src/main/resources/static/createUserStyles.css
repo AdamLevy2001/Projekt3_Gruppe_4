@@ -38,7 +38,8 @@ h1 {
 .form-group label {
     font-size: 18px;
     font-weight: bold;
-    width: 120px;
+    width: 140px;
+    flex-shrink: 0;
 }
 
 .form-group input {
@@ -71,7 +72,7 @@ button {
 }
 
 .container-header {
-    background: linear-gradient(to right, #F3F7FD, #F1F6FE);
+    background: linear-gradient(to right, #F3F7FD, #F1F6FE) !important;
     padding: 20px 40px;
     border-radius: 10px 10px 0 0;
     border: 1px solid #DFE9FA;

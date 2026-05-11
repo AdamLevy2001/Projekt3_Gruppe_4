@@ -53,7 +53,7 @@ public class UserService {
 
         String hashedPassword = passwordEncoder.encode(password);
 
-        User user = UserCreator.createUser(0, username, hashedPassword, role);
+        User user = UserCreator.createUser(0, username, hashedPassword, role.toLowerCase());
 
         userRepository.saveCreateUser(user);
     }
