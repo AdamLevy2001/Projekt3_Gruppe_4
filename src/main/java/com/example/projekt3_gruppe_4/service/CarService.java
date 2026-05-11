@@ -28,4 +28,12 @@ public class CarService {
     public List<Car> getLeasedCars() {
         return carRepository.findLeased();
     }
+
+    public double getTotalPriceForLeasedCars() {
+        return carRepository.getTotalPriceForLeasedCars();
+    }
+
+    public int countLeasedCars() {
+        return carRepository.countLeasedCars();
+    }
 }
