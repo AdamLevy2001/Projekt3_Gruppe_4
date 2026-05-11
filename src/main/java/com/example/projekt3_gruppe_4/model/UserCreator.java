@@ -6,6 +6,7 @@ public class UserCreator {
             case "dataRegistering" -> new DataregisteringUser(id, username, password, role);
             case "skadeUdbedring" -> new SkadeUdbedringUser(id, username, password, role);
             case "forretningsudvikler" -> new ForretningsudviklerUser(id, username, password, role);
+            case "admin" -> new AdminUser(id, username, password, role);
             default -> throw new IllegalArgumentException("Ukendt rolle: " + role);
         };
     }

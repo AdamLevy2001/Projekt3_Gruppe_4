@@ -37,4 +37,19 @@ public class UserRepository {
 
         return null;
     }
+
+    public void saveCreateUser(User user) {
+        String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+
+        try (Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getRole());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Fejl ved opretning af bruger med brugernavn, adgangskode og rolle: " + e);
+        }
+    }
 }
