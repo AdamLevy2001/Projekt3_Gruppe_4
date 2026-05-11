@@ -32,6 +32,10 @@
                th:href="@{/forretningsudvikler/skadesrapporter}">
                 <button>Skadesrapporter</button>
             </a>
+            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('admin/opret-bil')}"
+               th:href="@{/admin-opret-bil}">
+                <button>Opret bil</button>
+            </a>
             <form th:if="${session.loggedInUser != null}" th:action="@{/log-ud}" method="post">
                 <button type="submit">Log ud</button>
             </form>

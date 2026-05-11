@@ -1,0 +1,87 @@
+#create-car-container {
+    overflow-y: auto;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.form-row label {
+    font-weight: bold;
+    min-width: 120px;
+}
+
+.input-group {
+    flex: 1;
+}
+
+.input-group input {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.price-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.price-box input {
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.price-box span {
+    font-weight: bold;
+}
+
+.success-message {
+    color: #2e7d32;
+    background: #e8f5e9;
+    padding: 12px;
+    border: 8px;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: #c62828;
+    background: #ffebee;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+#opret-bil-btn {
+    width: 200px;
+    height: 40px;
+    background: #2f6edb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+#opret-bil-btn:hover {
+    background: #1f5bcc;
+}
+
+#button-row {
+    justify-content: flex-end;
+    margin-top: 20px;
+}

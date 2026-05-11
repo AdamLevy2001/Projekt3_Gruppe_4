@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret ny bil</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
+    <link rel="stylesheet" th:href="@{/createCarStyle.css}">
+    <link rel="icon" th:href="@{/images/BILABONNEMENT_favicon.svg}" type="image/png">
+</head>
+<body>
+<header>
+    <div th:replace="~{fragment :: navbar}"></div>
+</header>
+<main>
+    <div class="page-header">
+        <h1 th:text="${session.loggedInUser.getRoleDisplayName()}"></h1>
+    </div>
+    <div class="container" id="create-car-container">
+        <div class="container-header">
+            <h2>Opret ny bil</h2>
+        </div>
+    <form th:action="@{/admin/opret-bil}" method="post">
+
+        <div class="section">
+            <div th:if="${param.success}" class="success-message">
+                <p>Bilen er oprettet</p>
+                <br>
+            </div>
+            <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+                <br>
+            </div>
+
+            <div class="form-row">
+                <label for="chassisNo">Stelnr.</label>
+                <div class="input-group">
+                    <input type="text" id="chassisNo" name="chassisNo" th:value="${chassisNo}" placeholder="Stelnummer" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="brand">Mærke</label>
+                <div class="input-group">
+                    <input type="text" id="brand" name="brand" th:value="${brand}" placeholder="Mærke" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="model">Mode.</label>
+                <div class="input-group">
+                    <input type="text" id="model" name="model" th:value="${model}" placeholder="Model" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="purchasePrice">Pris</label>
+                <div class="price-box">
+                    <input type="number" id="purchasePrice" name="purchasePrice" th:value="${purchasePrice}" placeholder="indtast pris" required>
+                    <span>kr.</span>
+                </div>
+            </div>
+
+            <div class="form-row" id="button-row">
+                <button type="submit" id="opret-bil-btn">Opret bil</button>
+            </div>
+
+        </div>
+      </form>
+    </div>
+</main>
+</body>
+</html>

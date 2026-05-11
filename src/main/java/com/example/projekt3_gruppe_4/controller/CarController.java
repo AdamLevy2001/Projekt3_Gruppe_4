@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CarController {
@@ -44,5 +46,37 @@ public class CarController {
         }
         model.addAttribute("cars", carService.getLeasedCars());
         return "udlejede-biler";
+    }
+
+    @GetMapping("/admin/opret-bil")
+    public String showCreateCarForm(HttpSession session, Model model){
+        if (isUnauthorized(session, "admin/opret-bil")) {
+            return "redirect:/log-ind";
+        }
+        return "opret-bil";
+    }
+
+    @PostMapping("/admin/opret-bil")
+    public String createCar(@RequestParam String chassisNo,
+                            @RequestParam String brand,
+                            @RequestParam String model,
+                            @RequestParam double purchasePrice,
+                            HttpSession session,
+                            Model Model) {
+        if (isUnauthorized(session, "admin/opret-bil")) {
+            return "redirect:/log-ind";
+        }
+
+        try {
+            carService.createCar(chassisNo, brand, model, purchasePrice);
+            return "redirect:/admin/opret-bil?success=true";
+        } catch (IllegalArgumentException e) {
+            Model.addAttribute("errorMessage", e.getMessage());
+            Model.addAttribute("chassisNo", chassisNo);
+            Model.addAttribute("brand", brand);
+            Model.addAttribute("model", model);
+            Model.addAttribute("purchasePrice", purchasePrice);
+            return "opret-bil";
+        }
     }
 }

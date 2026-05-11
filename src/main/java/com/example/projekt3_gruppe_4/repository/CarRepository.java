@@ -117,4 +117,21 @@ public class CarRepository {
         }
         return cars;
     }
+
+    public void saveCar(Car car) {
+        String sql = "INSERT INTO cars (chassis_no, brand, model, purchase_price, status) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, car.getChassisNo());
+            statement.setString(2, car.getBrand());
+            statement.setString(3, car.getModel());
+            statement.setDouble(4, car.getPurchasePrice());
+            statement.setString(5, car.getStatus());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Fejl ved oprettelse af bil", e);
+        }
+    }
 }
