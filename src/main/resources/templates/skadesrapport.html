@@ -61,11 +61,13 @@
             </form>
         </div>
         <div class="afslut-container">
-            <a th:if="${canEdit}" th:href="@{/skade-udbedring/tilbageleverede-biler}">
-                <button type="button">Tilbage</button>
+            <a th:if="${session.loggedInUser.hasAccess('skade-udbedring/skadesrapporter') || session.loggedInUser.getRole().equals('admin')}"
+               th:href="@{/skade-udbedring/skadesrapporter}">
+                <button>Tilbage</button>
             </a>
-            <a th:if="${!canEdit}" th:href="@{/forretningsudvikler/skadesrapporter}">
-                <button type="button">Tilbage</button>
+            <a th:if="${session.loggedInUser.hasAccess('forretningsudvikler/skadesrapporter') && !session.loggedInUser.getRole().equals('admin')}"
+               th:href="@{/forretningsudvikler/skadesrapporter}">
+                <button>Tilbage</button>
             </a>
         </div>
     </div>
