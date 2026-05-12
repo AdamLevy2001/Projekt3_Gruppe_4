@@ -19,10 +19,6 @@ public class DamageService {
             throw new IllegalArgumentException("Beskrivelse kan ikke være tomt");
         }
 
-        if (!description.matches("[a-zA-ZøæåÆØÅ ]+")) {
-            throw new IllegalArgumentException("Beskrivelse må ikke indeholde tal");
-        }
-
         if (price <= 0) {
             throw new IllegalArgumentException("Pris skal være et positivt tal");
         }
