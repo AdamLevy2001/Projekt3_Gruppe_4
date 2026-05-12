@@ -1,7 +1,3 @@
-#create-car-container {
-    overflow-y: auto;
-}
-
 .form-row {
     display: flex;
     align-items: center;
@@ -35,16 +31,6 @@
     flex: 1;
 }
 
-.price-box input {
-    width: 200px;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    padding: 0 10px;
-    font-size: 14px;
-    outline: none;
-}
-
 .price-box span {
     font-weight: bold;
 }
@@ -63,25 +49,4 @@
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
-}
-
-#opret-bil-btn {
-    width: 200px;
-    height: 40px;
-    background: #2f6edb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: auto;
-}
-
-#opret-bil-btn:hover {
-    background: #1f5bcc;
-}
-
-#button-row {
-    justify-content: flex-end;
-    margin-top: 20px;
 }
