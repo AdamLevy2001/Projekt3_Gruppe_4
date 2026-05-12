@@ -29,6 +29,14 @@ public class CarService {
         return carRepository.findLeased();
     }
 
+    public double getTotalPriceForLeasedCars() {
+        return carRepository.getTotalPriceForLeasedCars();
+    }
+
+    public int countLeasedCars() {
+        return carRepository.countLeasedCars();
+    }
+  
     public void createCar(String chassisNo, String brand, String model, double purchasePrice) {
         if (chassisNo == null || chassisNo.trim().isEmpty()) {
             throw new IllegalArgumentException("Stelnr. må ikke være tomt");

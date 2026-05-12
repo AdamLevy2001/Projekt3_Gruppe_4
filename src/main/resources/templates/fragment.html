@@ -6,6 +6,10 @@
             <img th:src="@{/images/BILABONNEMENT_logo.svg}" alt="Bilabonnement logo">
         </div>
         <div class="navbar-buttons">
+          <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('forretningsudvikler/dashboard')}"
+               th:href="@{/forretningsudvikler/dashboard}">
+                <button>Dashboard</button>
+            </a>
             <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('dataregistrering/opret-lejeaftale') || session.loggedInUser.getRole().equals('admin'))}"
                th:href="@{/dataregistrering/opret-lejeaftale}">
                 <button>Opret lejeaftale</button>

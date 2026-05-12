@@ -118,6 +118,40 @@ public class CarRepository {
         return cars;
     }
 
+    public double getTotalPriceForLeasedCars() {
+        String sql="SELECT SUM(purchase_price) FROM cars WHERE status='leased'";
+
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)){
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getDouble(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Fejl ved summering af månedlige ydelser", e);
+        }
+        return 0;
+    }
+
+    public int countLeasedCars() {
+        String sql="SELECT COUNT(*) FROM cars WHERE status='leased'";
+
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Fejl ved optælling af udlejede biler", e);
+        }
+        return 0;
+      
+    }  
     public void saveCar(Car car) {
         String sql = "INSERT INTO cars (chassis_no, brand, model, purchase_price, status) VALUES (?, ?, ?, ?, ?)";
 
