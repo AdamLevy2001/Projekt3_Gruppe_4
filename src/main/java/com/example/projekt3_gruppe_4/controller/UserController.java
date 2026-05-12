@@ -41,4 +41,26 @@ public class UserController {
         session.invalidate();
         return "redirect:/log-ind";
     }
+
+    @GetMapping("/admin/opret-bruger")
+    public String opretBrugerPage() {
+        return "opret-bruger";
+    }
+
+    @PostMapping("/admin/opret-bruger")
+    public String postOpretBruger(@RequestParam("username") String username,
+                                  @RequestParam("password") String password,
+                                  @RequestParam("role") String role,
+                                  Model model) {
+        try {
+            userService.registrerUser(username, password, role);
+            return "redirect:/";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("username", username);
+            model.addAttribute("password", password);
+            model.addAttribute("role", role);
+            model.addAttribute("errorMessage", e.getMessage());
+            return "opret-bruger";
+        }
+    }
 }
