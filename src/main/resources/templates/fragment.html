@@ -10,7 +10,7 @@
                th:href="@{/forretningsudvikler/dashboard}">
                 <button>Dashboard</button>
             </a>
-            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('dataregistrering/opret-lejeaftale') || session.loggedInUser.getRole().equals('admin'))}"
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('dataregistrering/opret-lejeaftale') && !session.loggedInUser.getRole().equals('admin'))}"
                th:href="@{/dataregistrering/opret-lejeaftale}">
                 <button>Opret lejeaftale</button>
             </a>
