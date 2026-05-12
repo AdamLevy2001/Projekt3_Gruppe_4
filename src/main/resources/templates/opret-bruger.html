@@ -45,9 +45,9 @@
             <div class="form-group">
                 <label>Rolle:</label>
                 <select name="role">
-                    <option value="dataregistrering">Dataregistrering</option>
-                    <option value="skadeudbedring">Skade og Udbedring</option>
-                    <option value="forretningsudvikler">Forretningsudvikler</option>
+                    <option value="dataregistrering" th:selected="${role == 'dataRegistering'}">Dataregistrering</option>
+                    <option value="skadeudbedring" th:selected="${role == 'skadeudbedring'}">Skade og Udbedring</option>
+                    <option value="forretningsudvikler" th:selected="${role == 'forretningsudvikler'}">Forretningsudvikler</option>
                 </select>
             </div>
 
