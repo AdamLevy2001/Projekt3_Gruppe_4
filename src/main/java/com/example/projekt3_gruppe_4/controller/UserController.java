@@ -15,6 +15,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    private boolean isUnauthorized(HttpSession session, String page) {
+        User user = (User) session.getAttribute("loggedInUser");
+        return user == null || !user.hasAccess(page);
+    }
+
     @GetMapping("/log-ind")
     public String loginPage() {
         return "log-ind";
@@ -43,7 +48,10 @@ public class UserController {
     }
 
     @GetMapping("/admin/opret-bruger")
-    public String opretBrugerPage() {
+    public String opretBrugerPage(HttpSession session) {
+       if (isUnauthorized(session, "admin/opret-bruger")) {
+           return "redirect:/log-ind";
+       }
         return "opret-bruger";
     }
 
@@ -51,10 +59,13 @@ public class UserController {
     public String postOpretBruger(@RequestParam("username") String username,
                                   @RequestParam("password") String password,
                                   @RequestParam("role") String role,
-                                  Model model) {
+                                  Model model, HttpSession session) {
+        if (isUnauthorized(session, "admin/opret-bruger")) {
+            return "redirect:/log-ind";
+        }
         try {
             userService.registrerUser(username, password, role);
-            return "redirect:/";
+            return "redirect:/admin/opret-bruger?success=true";
         } catch (IllegalArgumentException e) {
             model.addAttribute("username", username);
             model.addAttribute("password", password);

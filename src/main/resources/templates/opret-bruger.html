@@ -21,6 +21,17 @@
     <div class="card">
         <form th:action="@{/admin/opret-bruger}" method="post">
 
+            <div th:if="${param.success}" class="success-message">
+                <p>Brugeren er oprettet</p>
+                <br>
+            </div>
+
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
+                <br>
+            </div>
+
+
             <div class="form-group">
                 <label>Brugernavn:</label>
                 <input type="text" name="username" placeholder="Brugernavn">
