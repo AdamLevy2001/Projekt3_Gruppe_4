@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret Skadesrapport</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
+    <link rel="stylesheet" th:href="@{/createDamageReport.css}">
+    <link rel="icon" th:href="@{/images/BILABONNEMENT_favicon.svg}" type="image/png">
+</head>
+<body>
+<header>
+    <div th:replace="~{fragment :: navbar}"></div>
+</header>
+<main>
+    <div class="page-header">
+        <h1 th:text="${session.loggedInUser.getRoleDisplayName()}"></h1>
+    </div>
+    <div class="container">
+        <div class="container-header">
+            <h2>Opret skadesrapport</h2>
+            <h2><strong>Vognnummer: </strong><span th:text="${vehicleNo}"></span></h2>
+        </div>
+        <div class="section">
+            <div th:each="damage : ${damages}" class="damage-item">
+                <div>
+                    <p><strong>Skade</strong></p>
+                    <p>Beskrivelse: <span th:text="${damage.description}"></span></p>
+                    <p>Pris: <span th:text="${damage.price}"></span> kr.</p>
+                </div>
+                <div th:if="${canEdit}">
+                    <form th:action="@{/skade-udbedring/skadesrapport/fjern-skade}" method="post">
+                        <input type="hidden" name="damageId" th:value="${damage.id}">
+                        <input type="hidden" name="vehicleNo" th:value="${vehicleNo}">
+                        <button type="submit">
+                            Fjern skade
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <hr th:if="${!damages.isEmpty()}">
+        </div>
+        <div th:if="${canEdit}">
+            <form th:action="@{/skade-udbedring/skadesrapport/tilfoej-skade}" method="post">
+                <input type="hidden" name="vehicleNo" th:value="${vehicleNo}">
+                <input type="hidden" name="damageReportId" th:value="${damageReportId}">
+                <div class="section">
+                    <div class="form-row">
+                        <label>Skade:</label>
+                        <div class="input-group">
+                            <input type="text" name="description" placeholder="Beskrivelse" required>
+                        </div>
+                        <div class="price-box">
+                            <input type="text" name="price" placeholder="Pris" required>
+                            <span><strong>kr.</strong></span>
+                        </div>
+                        <button type="submit">
+                            Opret skade
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div th:if="${canEdit}">
+            <div class="afslut-container">
+                <button type="submit">Afslut skadesrapport</button>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

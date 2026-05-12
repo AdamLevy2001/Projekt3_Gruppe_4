@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ledige biler</title>
+    <link rel="stylesheet" th:href="@{/common.css}">
+    <link rel="stylesheet" th:href="@{/ListeGrid.css}">
+    <link rel="icon" th:href="@{/images/BILABONNEMENT_favicon.svg}" type="image/png">
+</head>
+<body>
+<header>
+    <div th:replace="~{fragment :: navbar}"></div>
+</header>
+<main>
+    <div class="page-header">
+        <h1 th:text="${session.loggedInUser.getRoleDisplayName()}"></h1>
+    </div>
+    <div class="container">
+        <div class="container-header">
+            <h2>Ledige biler</h2>
+        </div>
+
+        <div th:if="${cars.isEmpty()}" class="info-message">
+            Der er ingen ledige biler.
+        </div>
+        <div class="section" id="ledige-biler-section">
+            <table th:if="${!cars.isEmpty()}" class="data-table">
+                <thead>
+                <tr>
+                    <th>Vognnr.</th>
+                    <th>Stelnr.</th>
+                    <th>Mærke</th>
+                    <th>Model</th>
+                    <th>Handling</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="car : ${cars}" class="car-card">
+                    <td th:text="${car.vehicleNo}"></td>
+                    <td th:text="${car.chassisNo}"></td>
+                    <td th:text="${car.brand}"></td>
+                    <td th:text="${car.model}"></td>
+                    <td>
+                        <a th:href="@{/dataregistrering/opret-lejeaftale(vehicleNo=${car.vehicleNo})}">Opret
+                            Lejeaftale</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>
