@@ -27,11 +27,11 @@
                     <p>Model: <span th:text="${damageReport.model}"></span></p>
                     <p>Kundens navn: <span th:text="${damageReport.firstName + ' ' + damageReport.lastName}"></span></p>
                 </div>
-                <a th:if="${session.loggedInUser.hasAccess('skade-udbedring/skadesrapporter')}"
+                <a th:if="${session.loggedInUser.getRole().equals('skadeudbedring') || session.loggedInUser.getRole().equals('admin')}"
                    th:href="@{/skade-udbedring/skadesrapport(vehicleNo=${damageReport.vehicleNo})}">
                     <button>Åben skadesrapport</button>
                 </a>
-                <a th:if="${session.loggedInUser.hasAccess('forretningsudvikler/skadesrapporter')}"
+                <a th:if="${session.loggedInUser.getRole().equals('forretningsudvikler')}"
                    th:href="@{/forretningsudvikler/skadesrapport(vehicleNo=${damageReport.vehicleNo})}">
                     <button>Åben skadesrapport</button>
                 </a>

@@ -33,14 +33,13 @@ public class UserService {
     }
 
     public void registrerUser(String username, String password, String role) {
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Brugernavn kan ikke være tomt");
+        }
         User existningUser = userRepository.findUserByUsername(username);
 
         if (existningUser != null) {
             throw new IllegalArgumentException("Brugernavn findes allerede");
-        }
-
-        if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Brugernavn kan ikke være tomt");
         }
 
         if (password == null || password.length() < 8) {

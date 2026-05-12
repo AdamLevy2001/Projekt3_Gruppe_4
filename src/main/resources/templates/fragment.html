@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-
 <nav th:fragment="navbar">
     <div class="navbar">
         <div class="navbar-logo">
             <img th:src="@{/images/BILABONNEMENT_logo.svg}" alt="Bilabonnement logo">
         </div>
         <div class="navbar-buttons">
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('dataregistrering/ledige-biler')}"
-               th:href="@{/dataregistrering/ledige-biler}">
-                <button>Ledige biler</button>
-            </a>
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('dataregistrering/opret-lejeaftale')}"
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('dataregistrering/opret-lejeaftale') || session.loggedInUser.getRole().equals('admin'))}"
                th:href="@{/dataregistrering/opret-lejeaftale}">
                 <button>Opret lejeaftale</button>
             </a>
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('skade-udbedring/tilbageleverede-biler')}"
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('dataregistrering/ledige-biler') || session.loggedInUser.getRole().equals('admin'))}"
+               th:href="@{/dataregistrering/ledige-biler}">
+                <button>Ledige biler</button>
+            </a>
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('skade-udbedring/tilbageleverede-biler') || session.loggedInUser.getRole().equals('admin'))}"
                th:href="@{/skade-udbedring/tilbageleverede-biler}">
                 <button>Tilbageleverede biler</button>
             </a>
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('skade-udbedring/skadesrapporter')}"
-               th:href="@{/skade-udbedring/skadesrapporter}">
-                <button>Skadesrapporter</button>
-            </a>
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('forretningsudvikler/udlejede-biler')}"
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('forretningsudvikler/udlejede-biler') || session.loggedInUser.getRole().equals('admin'))}"
                th:href="@{/forretningsudvikler/udlejede-biler}">
                 <button>Udlejede biler</button>
             </a>
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('forretningsudvikler/skadesrapporter')}"
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('skade-udbedring/skadesrapporter') || session.loggedInUser.getRole().equals('admin'))}"
+               th:href="@{/skade-udbedring/skadesrapporter}">
+                <button>Skadesrapporter</button>
+            </a>
+            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('forretningsudvikler/skadesrapporter') && !session.loggedInUser.getRole().equals('admin')}"
                th:href="@{/forretningsudvikler/skadesrapporter}">
                 <button>Skadesrapporter</button>
             </a>
-            <a th:if="${session.loggedInUser != null && session.loggedInUser.hasAccess('admin/opret-bil')}"
-               th:href="@{/admin-opret-bil}">
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('admin/opret-bil') || session.loggedInUser.getRole().equals('admin'))}"
+               th:href="@{/admin/opret-bil}">
                 <button>Opret bil</button>
+            </a>
+            <a th:if="${session.loggedInUser != null && (session.loggedInUser.hasAccess('admin/opret-bruger') || session.loggedInUser.getRole().equals('admin'))}"
+               th:href="@{/admin/opret-bruger}">
+                <button>Opret bruger</button>
             </a>
             <form th:if="${session.loggedInUser != null}" th:action="@{/log-ud}" method="post">
                 <button type="submit">Log ud</button>
@@ -42,6 +44,4 @@
         </div>
     </div>
 </nav>
-
-</body>
 </html>
