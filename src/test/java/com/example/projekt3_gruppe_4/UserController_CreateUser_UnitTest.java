@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,21 +31,40 @@ public class UserController_CreateUser_UnitTest {
     @InjectMocks
     private UserController userController;
 
-@Test
-public void createUserHappyFlow() {
-    //Precondition
-    String username = "demo";
-    String password = "demo";
-    String role = "admin";
-    User user = UserCreator.createUser(1, username
-    , password ,role);
-    given(session.getAttribute("loggedInUser")).willReturn(user);
+    @Test
+    public void createUserHappyFlow() {
+        // Precondition
+        String username = "demo";
+        String password = "demo";
+        String role = "admin";
+        User user = UserCreator.createUser(1, username, password, role);
+        given(session.getAttribute("loggedInUser")).willReturn(user);
 
-    //Execution
-    String result = userController.createUser(username,password,role,model,session);
+        // Execution
+        String result = userController.createUser(username, password, role, model, session);
 
+        // Postcondition
+        assertEquals("redirect:/admin/opret-bruger?success=true", result);
+    }
 
-    //postcondition
-    assertEquals("redirect:/admin/opret-bruger?success=true", result);
+    @Test
+    public void createUserExceptionFlow(){
+        // Precondition
+        String username = "demo";
+        String password = "demo";
+        String role = "admin";
+        User user = UserCreator.createUser(1, username, password, role);
+        given(session.getAttribute("loggedInUser")).willReturn(user);
+        willThrow(new IllegalArgumentException("Brugernavn kan ikke være tomt!")).given(userService).registrerUser(username, password, role);
+
+        // Execution
+        String result = userController.createUser(username, password, role, model, session);
+
+        // Postcondition
+        assertEquals("opret-bruger", result);
+        verify(model).addAttribute("username", username);
+        verify(model).addAttribute("password", password);
+        verify(model).addAttribute("role", role);
+        verify(model).addAttribute("errorMessage", "Brugernavn kan ikke være tomt!");
     }
 }
