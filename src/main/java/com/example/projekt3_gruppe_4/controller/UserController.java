@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/admin/opret-bruger")
-    public String opretBrugerPage(HttpSession session) {
+    public String createUser(HttpSession session) {
        if (isUnauthorized(session, "admin/opret-bruger")) {
            return "redirect:/log-ind";
        }
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/opret-bruger")
-    public String postOpretBruger(@RequestParam("username") String username,
+    public String createUser(@RequestParam("username") String username,
                                   @RequestParam("password") String password,
                                   @RequestParam("role") String role,
                                   Model model, HttpSession session) {
