@@ -16,13 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DamageReportController {
 
     @Autowired
-    DamageService damageService;
-
-    @Autowired
     DamageReportService damageReportService;
-
-    @Autowired
-    LeaseService leaseService;
 
     private boolean isUnauthorized(HttpSession session, String page) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -30,11 +24,9 @@ public class DamageReportController {
     }
 
     private void buildDamageReportModel(int vehicleNo, Model model) {
-        int leaseId = leaseService.findLeaseIdByVehicleNo(vehicleNo);
-        int damageReportId = damageReportService.getOrCreateDamageReport(leaseId);
-        model.addAttribute("damages", damageService.getAllDamagesByReportId(damageReportId));
+        model.addAttribute("damages", damageReportService.getDamagesByVehicleNo(vehicleNo));
         model.addAttribute("vehicleNo", vehicleNo);
-        model.addAttribute("damageReportId", damageReportId);
+        model.addAttribute("damageReportId", damageReportService.getDamageReportIdByVehicleNo(vehicleNo));
     }
 
     @GetMapping("/skade-udbedring/skadesrapport")
