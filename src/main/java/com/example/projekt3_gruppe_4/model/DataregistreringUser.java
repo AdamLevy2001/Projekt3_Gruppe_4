@@ -1,7 +1,7 @@
 package com.example.projekt3_gruppe_4.model;
 
-public class DataregisteringUser extends User {
-    DataregisteringUser(int id, String username, String password, String role) {
+public class DataregistreringUser extends User {
+    DataregistreringUser(int id, String username, String password, String role) {
         super(id, username, password, role);
     }
 
