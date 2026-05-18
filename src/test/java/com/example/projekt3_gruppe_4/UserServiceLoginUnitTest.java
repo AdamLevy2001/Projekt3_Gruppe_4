@@ -23,7 +23,7 @@ public class UserServiceLoginUnitTest {
     @InjectMocks
     private UserService userService;
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     @Test
     public void loginHappyFlow() {
