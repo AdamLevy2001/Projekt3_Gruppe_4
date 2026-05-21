@@ -16,7 +16,7 @@ import java.util.List;
 public class DamageRepository {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public void saveDamage(Damage damage) {
         String sql = "INSERT INTO damages (damageReport_id, description, price) VALUES (?, ?, ?)";

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DamageController {
 
     @Autowired
-    DamageService damageService;
+    private DamageService damageService;
 
     private boolean isUnauthorized(HttpSession session, String page) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -20,11 +20,11 @@ public class DamageController {
     }
 
     @PostMapping("/skade-udbedring/skadesrapport/tilfoej-skade")
-    public String createDamage(@RequestParam String description,
-                               @RequestParam double price,
-                               @RequestParam int damageReportId,
-                               @RequestParam int vehicleNo,
-                               HttpSession session) {
+    public String postCreateDamage(@RequestParam String description,
+                                   @RequestParam double price,
+                                   @RequestParam int damageReportId,
+                                   @RequestParam int vehicleNo,
+                                   HttpSession session) {
         if (isUnauthorized(session, "skade-udbedring/skadesrapport")) {
             return "redirect:/log-ind";
         }
@@ -33,13 +33,13 @@ public class DamageController {
     }
 
     @PostMapping("/skade-udbedring/skadesrapport/fjern-skade")
-    public String removeDamage(@RequestParam int damageId,
-                               @RequestParam int vehicleNo,
-                               HttpSession session) {
+    public String postRemoveDamage(@RequestParam int damageId,
+                                   @RequestParam int vehicleNo,
+                                   HttpSession session) {
         if (isUnauthorized(session, "skade-udbedring/skadesrapport")) {
             return "redirect:/log-ind";
         }
-        damageService.fjernDamage(damageId);
+        damageService.deleteDamage(damageId);
         return "redirect:/skade-udbedring/skadesrapport?vehicleNo=" + vehicleNo;
     }
 }

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 @Repository
 public class UserRepository {
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public User findUserByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";

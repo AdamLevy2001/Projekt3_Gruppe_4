@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class DeliveryLocationRepository {
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public List<DeliveryLocation> getAllDeliveryLocations() {
         List<DeliveryLocation> deliveryLocations = new ArrayList<>();

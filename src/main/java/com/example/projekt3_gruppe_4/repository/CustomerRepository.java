@@ -11,7 +11,7 @@ import java.sql.*;
 public class CustomerRepository {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public Customer createCustomer(Customer customer) {
         String sql = "INSERT INTO customers (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)";

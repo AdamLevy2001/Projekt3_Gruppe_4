@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class DeliveryLocationService {
     @Autowired
-    DeliveryLocationRepository deliveryLocationRepository;
+    private DeliveryLocationRepository deliveryLocationRepository;
 
     public List<DeliveryLocation> getAllDeliveryLocations() {
         return deliveryLocationRepository.getAllDeliveryLocations();

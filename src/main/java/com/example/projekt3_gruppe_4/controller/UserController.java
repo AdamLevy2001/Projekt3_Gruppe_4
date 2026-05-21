@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     private boolean isUnauthorized(HttpSession session, String page) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/log-ind")
-    public String loginPage() {
+    public String getLoginPage() {
         return "log-ind";
     }
 
@@ -42,13 +42,13 @@ public class UserController {
     }
 
     @PostMapping("/log-ud")
-    public String logout(HttpSession session) {
+    public String postLogout(HttpSession session) {
         session.invalidate();
         return "redirect:/log-ind";
     }
 
     @GetMapping("/admin/opret-bruger")
-    public String opretBrugerPage(HttpSession session) {
+    public String getCreateUser(HttpSession session) {
        if (isUnauthorized(session, "admin/opret-bruger")) {
            return "redirect:/log-ind";
        }
@@ -56,10 +56,10 @@ public class UserController {
     }
 
     @PostMapping("/admin/opret-bruger")
-    public String postOpretBruger(@RequestParam("username") String username,
-                                  @RequestParam("password") String password,
-                                  @RequestParam("role") String role,
-                                  Model model, HttpSession session) {
+    public String postCreateUser(@RequestParam("username") String username,
+                                 @RequestParam("password") String password,
+                                 @RequestParam("role") String role,
+                                 Model model, HttpSession session) {
         if (isUnauthorized(session, "admin/opret-bruger")) {
             return "redirect:/log-ind";
         }

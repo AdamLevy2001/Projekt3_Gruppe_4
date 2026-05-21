@@ -14,21 +14,6 @@ public class Lease {
     private LocalDate endDate;
     private String status;
 
-    public Lease(int id, int carVehicleNo, int customerId, int deliveryLocationId,
-                 double downPayment, double monthlyPayment, int kmPerMonth,
-                 LocalDate startDate, LocalDate endDate, String status) {
-        this.id = id;
-        this.carVehicleNo = carVehicleNo;
-        this.customerId = customerId;
-        this.deliveryLocationId = deliveryLocationId;
-        this.downPayment = downPayment;
-        this.monthlyPayment = monthlyPayment;
-        this.kmPerMonth = kmPerMonth;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-    }
-
     public Lease() {
     }
 
