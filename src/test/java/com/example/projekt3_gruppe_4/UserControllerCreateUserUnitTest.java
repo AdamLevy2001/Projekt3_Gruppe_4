@@ -41,7 +41,7 @@ public class UserControllerCreateUserUnitTest {
         given(session.getAttribute("loggedInUser")).willReturn(user); // simulerer at admin er logget ind i sessionen
 
         // Execution
-        String result = userController.createUser("data", "data", "dataregistrering", model, session); // opretter en ny dataregistrerings bruger via controlleren
+        String result = userController.postCreateUser("data", "data", "dataregistrering", model, session); // opretter en ny dataregistrerings bruger via controlleren
 
         // Postcondition
         assertEquals("redirect:/admin/opret-bruger?success=true", result); // verificere at der bliver returneret det som vi forventer
@@ -62,7 +62,7 @@ public class UserControllerCreateUserUnitTest {
         willThrow(new IllegalArgumentException("Brugernavn kan ikke være tomt!")).given(userService).registrerUser(newUserUsername, newUserPassword, newUserRole); // simulerer at userService kaster en exception ved oprettelse af den nye bruger
 
         // Execution
-        String result = userController.createUser(newUserUsername, newUserPassword, newUserRole, model, session); // opretter en ny dataregistrerings bruger via controlleren
+        String result = userController.postCreateUser(newUserUsername, newUserPassword, newUserRole, model, session); // opretter en ny dataregistrerings bruger via controlleren
 
         // Postcondition
         assertEquals("opret-bruger", result); // verificere at der bliver returneret det som vi forventer
