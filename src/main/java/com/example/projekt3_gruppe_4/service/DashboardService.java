@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class DashboardService {
     @Autowired
-    CarService carService;
+    private CarService carService;
 
     public List<Car> getLeasedCars() {
         return carService.getLeasedCars();

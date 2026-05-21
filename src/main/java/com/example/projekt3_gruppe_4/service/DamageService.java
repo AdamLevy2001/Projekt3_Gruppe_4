@@ -11,7 +11,7 @@ import java.util.List;
 public class DamageService {
 
     @Autowired
-    DamageRepository damageRepository;
+    private DamageRepository damageRepository;
 
     public void registrerDamages(String description, double price, int damageReportId) {
 
@@ -30,7 +30,7 @@ public class DamageService {
         return damageRepository.getAllDamagesByReportId(damageReportId);
     }
 
-    public void fjernDamage(int damageId) {
+    public void deleteDamage(int damageId) {
         damageRepository.deleteDamage(damageId);
     }
 }

@@ -13,10 +13,10 @@ import java.time.LocalDate;
 public class LeaseService {
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    LeaseRepository leaseRepository;
+    private LeaseRepository leaseRepository;
 
     public void createLeaseWithCustomer(String firstName, String lastName, String email, String phoneNumber,
                                         int carVehicleNo, int deliveryLocationId, LocalDate startDate, int leaseLength,

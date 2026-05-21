@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     public User login(String username, String password) {
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {

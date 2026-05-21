@@ -12,13 +12,13 @@ import java.util.List;
 public class DamageReportService {
 
     @Autowired
-    DamageReportRepository damageReportRepository;
+    private DamageReportRepository damageReportRepository;
 
     @Autowired
-    LeaseService leaseService;
+    private LeaseService leaseService;
 
     @Autowired
-    DamageService damageService;
+    private DamageService damageService;
 
     public List<DamageReportView> getAllDamageReports() {
         return damageReportRepository.getAllDamageReports();
