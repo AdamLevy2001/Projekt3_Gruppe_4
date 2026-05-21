@@ -10,7 +10,7 @@ import java.sql.*;
 @Repository
 public class LeaseRepository {
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public void createLease(Lease lease) {
         String insertLeaseSql = "INSERT INTO leases (carVehicle_no, customer_id, deliveryLocation_id, down_payment, monthly_payment, km_per_month, start_date, end_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

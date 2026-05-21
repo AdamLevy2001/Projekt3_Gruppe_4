@@ -17,7 +17,7 @@ import java.util.List;
 public class CarRepository {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public List<Car> findReturned() {
         List<Car> cars = new ArrayList<>();
