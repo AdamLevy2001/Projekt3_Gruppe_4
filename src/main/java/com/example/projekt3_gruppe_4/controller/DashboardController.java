@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController {
     @Autowired
-    DashboardService dashboardService;
+    private DashboardService dashboardService;
 
     private boolean isUnauthorized(HttpSession session, String page) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -19,7 +19,7 @@ public class DashboardController {
     }
 
     @GetMapping("/forretningsudvikler/dashboard")
-    public String showDashboard(HttpSession session, Model model){
+    public String getDashboard(HttpSession session, Model model){
         if (isUnauthorized(session, "forretningsudvikler/dashboard")) {
             return "redirect:/log-ind";
         }

@@ -18,13 +18,13 @@ import java.util.List;
 @Controller
 public class LeaseController {
     @Autowired
-    LeaseService leaseService;
+    private LeaseService leaseService;
 
     @Autowired
-    CarService carService;
+    private CarService carService;
 
     @Autowired
-    DeliveryLocationService deliveryLocationService;
+    private DeliveryLocationService deliveryLocationService;
 
     private boolean isUnauthorized(HttpSession session, String page) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -32,9 +32,9 @@ public class LeaseController {
     }
 
     @GetMapping("/dataregistrering/opret-lejeaftale")
-    public String showCreateLeaseForm(@RequestParam(required = false) Integer vehicleNo,
-                                      Model model,
-                                      HttpSession session) {
+    public String getCreateLeaseForm(@RequestParam(required = false) Integer vehicleNo,
+                                     Model model,
+                                     HttpSession session) {
         if (isUnauthorized(session, "dataregistrering/opret-lejeaftale")) {
             return "redirect:/log-ind";
         }
@@ -55,7 +55,7 @@ public class LeaseController {
 
 
     @PostMapping("/dataregistrering/opret-lejeaftale")
-    public String createLease(
+    public String postCreateLease(
             @RequestParam String firstName,
             @RequestParam String lastName,
             @RequestParam String email,

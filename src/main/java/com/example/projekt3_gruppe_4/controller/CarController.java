@@ -22,7 +22,7 @@ public class CarController {
     }
 
     @GetMapping("/dataregistrering/ledige-biler")
-    public String showAvailableCars(HttpSession session, Model model) {
+    public String getAvailableCars(HttpSession session, Model model) {
         if (isUnauthorized(session, "dataregistrering/ledige-biler")) {
             return "redirect:/log-ind";
         }
@@ -31,7 +31,7 @@ public class CarController {
     }
 
     @GetMapping("/skade-udbedring/tilbageleverede-biler")
-    public String showReturnedCars(HttpSession session, Model model) {
+    public String getReturnedCars(HttpSession session, Model model) {
         if (isUnauthorized(session, "skade-udbedring/tilbageleverede-biler")) {
             return "redirect:/log-ind";
         }
@@ -40,7 +40,7 @@ public class CarController {
     }
 
     @GetMapping("/forretningsudvikler/udlejede-biler")
-    public String showLeasedCars(HttpSession session, Model model) {
+    public String getLeasedCars(HttpSession session, Model model) {
         if (isUnauthorized(session, "forretningsudvikler/udlejede-biler")) {
             return "redirect:/log-ind";
         }
@@ -49,7 +49,7 @@ public class CarController {
     }
 
     @GetMapping("/admin/opret-bil")
-    public String showCreateCarForm(HttpSession session, Model model){
+    public String getCreateCarForm(HttpSession session, Model model){
         if (isUnauthorized(session, "admin/opret-bil")) {
             return "redirect:/log-ind";
         }
@@ -57,7 +57,7 @@ public class CarController {
     }
 
     @PostMapping("/admin/opret-bil")
-    public String createCar(@RequestParam String chassisNo,
+    public String postCreateCar(@RequestParam String chassisNo,
                             @RequestParam String brand,
                             @RequestParam String model,
                             @RequestParam double purchasePrice,
