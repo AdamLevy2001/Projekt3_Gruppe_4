@@ -14,7 +14,7 @@ public class LeaseRepository {
 
     public void createLease(Lease lease) {
         String insertLeaseSql = "INSERT INTO leases (carVehicle_no, customer_id, deliveryLocation_id, down_payment, monthly_payment, km_per_month, start_date, end_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String updateCarSql = "UPDATE cars SET status ='leased' WHERE vehicle_no = ?";
+        String updateCarSql = "UPDATE cars SET status = 'leased' WHERE vehicle_no = ? AND status = 'available'";
 
         try (Connection connection = dataSource.getConnection()) {
 
@@ -24,6 +24,14 @@ public class LeaseRepository {
                     PreparedStatement insertStatement = connection.prepareStatement(insertLeaseSql);
                     PreparedStatement updateStatement = connection.prepareStatement(updateCarSql);
             ) {
+
+                updateStatement.setInt(1, lease.getCarVehicleNo());
+                int rowsUpdated = updateStatement.executeUpdate();
+
+                if (rowsUpdated == 0) {
+                    connection.rollback();
+                    throw new IllegalArgumentException("Bilen er ikke længere ledig!");
+                }
 
                 insertStatement.setInt(1, lease.getCarVehicleNo());
                 insertStatement.setInt(2, lease.getCustomerId());
@@ -37,10 +45,8 @@ public class LeaseRepository {
 
                 insertStatement.executeUpdate();
 
-                updateStatement.setInt(1, lease.getCarVehicleNo());
-                updateStatement.executeUpdate();
-
                 connection.commit();
+
             } catch (SQLException e) {
                 connection.rollback();
                 throw new RuntimeException("Fejl ved oprettelsen af lejeaftale!", e);
